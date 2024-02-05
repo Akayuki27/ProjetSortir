@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\ParticipantRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -41,6 +43,22 @@ class Participant implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Column]
     private ?bool $active = null;
+
+    #[ORM\ManyToMany(targetEntity: Sortie::class, inversedBy: 'participants')]
+    private Collection $estInscrit;
+
+    #[ORM\OneToMany(targetEntity: Sortie::class, mappedBy: 'organisateur')]
+    private Collection $organisateur;
+
+    #[ORM\ManyToOne(inversedBy: 'eleves')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Campus $estRattacheA = null;
+
+    public function __construct()
+    {
+        $this->estInscrit = new ArrayCollection();
+        $this->organisateur = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -168,6 +186,72 @@ class Participant implements UserInterface, PasswordAuthenticatedUserInterface
     public function setActive(bool $active): static
     {
         $this->active = $active;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Sortie>
+     */
+    public function getEstInscrit(): Collection
+    {
+        return $this->estInscrit;
+    }
+
+    public function addEstInscrit(Sortie $estInscrit): static
+    {
+        if (!$this->estInscrit->contains($estInscrit)) {
+            $this->estInscrit->add($estInscrit);
+        }
+
+        return $this;
+    }
+
+    public function removeEstInscrit(Sortie $estInscrit): static
+    {
+        $this->estInscrit->removeElement($estInscrit);
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Sortie>
+     */
+    public function getOrganisateur(): Collection
+    {
+        return $this->organisateur;
+    }
+
+    public function addOrganisateur(Sortie $organisateur): static
+    {
+        if (!$this->organisateur->contains($organisateur)) {
+            $this->organisateur->add($organisateur);
+            $organisateur->setOrganisateur($this);
+        }
+
+        return $this;
+    }
+
+    public function removeOrganisateur(Sortie $organisateur): static
+    {
+        if ($this->organisateur->removeElement($organisateur)) {
+            // set the owning side to null (unless already changed)
+            if ($organisateur->getOrganisateur() === $this) {
+                $organisateur->setOrganisateur(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getEstRattacheA(): ?Campus
+    {
+        return $this->estRattacheA;
+    }
+
+    public function setEstRattacheA(?Campus $estRattacheA): static
+    {
+        $this->estRattacheA = $estRattacheA;
 
         return $this;
     }
