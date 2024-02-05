@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello SortieController!{% endblock %}
+
+{% block body %}
+    <h1>Liste des sorties</h1>
+<div>
+    {% for sortie in sorties %}
+    <div>
+        <p>{{ sortie.nom }} à {{ sortie.lieu.nom }}</p>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

@@ -23,26 +23,19 @@ class SortieType extends AbstractType
             ->add('dateLimiteInscription')
             ->add('nbInscriptionMax')
             ->add('infosSortie')
-            ->add('participants', EntityType::class, [
-                'class' => Participant::class,
-'choice_label' => 'id',
-'multiple' => true,
-            ])
-            ->add('organisateur', EntityType::class, [
-                'class' => Participant::class,
-'choice_label' => 'id',
-            ])
+
+
             ->add('campus', EntityType::class, [
                 'class' => Campus::class,
-'choice_label' => 'id',
+'choice_label' => 'nom',
             ])
             ->add('etat', EntityType::class, [
                 'class' => Etat::class,
-'choice_label' => 'id',
+'choice_label' => 'libelle',
             ])
             ->add('Lieu', EntityType::class, [
                 'class' => Lieu::class,
-'choice_label' => 'id',
+'choice_label' => 'nom',
             ])
         ;
     }
