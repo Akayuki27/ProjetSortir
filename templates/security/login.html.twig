@@ -23,7 +23,8 @@
     <input type="hidden" name="_csrf_token"
            value="{{ csrf_token('authenticate') }}"
     >
-
+    <label for="_remember_me">Se souvenir de moi</label>
+    <input type="checkbox" name="_remember_me">
     <button class="btn btn-lg btn-primary" type="submit">
         Sign in
     </button>
