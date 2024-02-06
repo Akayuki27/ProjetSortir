@@ -98,18 +98,22 @@ class AdminController extends AbstractController
                 }
                 break;
             case 'filtrer':
-                $nom = $request->request->get('filtrer');
+                $nom = $request->query->get('filtrer');
                 if ($nom) {
                     $campuses = $campusRepository->findBy(["nom"=>$nom]);
+                    dump($campuses);
                 }else{
                     $campuses = $campusRepository->findAll();
+                    dump($campuses);
                 }
                 break;
             default:
                 $campuses = $campusRepository->findAll();
+                dump($campuses);
         }
 
-        if(isset($campuses)){
+        if(!empty($campuses)){
+            dump($campuses);
             return $this->render('admin/campus.html.twig', ['campuses' => $campuses]);
         }else{
             return $this->redirectToRoute('app_admin_campus');
