@@ -15,7 +15,7 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 class RegistrationController extends AbstractController
 {
     #[Route('/register', name: 'app_register')]
-    public function register(Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $entityManager): Response
+    public function register(Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $entityManager, Participant $participant): Response
     {
         $user = new Participant();
         $form = $this->createForm(RegistrationFormType::class, $user);
@@ -31,6 +31,18 @@ class RegistrationController extends AbstractController
             );
 
             $user->setActive(true);
+
+            // Gérer le téléchargement de la photo
+            $photoFile = $form->get('ImgName')->getData();
+            if ($photoFile) {
+                // Renommer et déplacer le fichier téléchargé
+                $newFileName = md5(uniqid()).'.'.$photoFile->guessExtension();
+                $photoFile->move($this->getParameter('img'), $newFileName);
+
+                // Mettre à jour le nom de fichier de la photo dans l'entité Participant
+                $participant->setImgName($newFileName);
+
+            }
 
             $entityManager->persist($user);
             $entityManager->flush();

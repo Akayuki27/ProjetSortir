@@ -56,6 +56,9 @@ class Participant implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\JoinColumn(nullable: false)]
     private ?Campus $estRattacheA = null;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $ImgName = null;
+
     public function __construct()
     {
         $this->estInscrit = new ArrayCollection();
@@ -254,6 +257,18 @@ class Participant implements UserInterface, PasswordAuthenticatedUserInterface
     public function setEstRattacheA(?Campus $estRattacheA): static
     {
         $this->estRattacheA = $estRattacheA;
+
+        return $this;
+    }
+
+    public function getImgName(): ?string
+    {
+        return $this->ImgName;
+    }
+
+    public function setImgName(?string $ImgName): static
+    {
+        $this->ImgName = $ImgName;
 
         return $this;
     }

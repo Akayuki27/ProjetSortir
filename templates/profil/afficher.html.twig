@@ -4,6 +4,9 @@
 
 {% block body %}
     <h1>Profil de {{ participant.pseudo }}</h1>
+    {% if participant.ImgName %}
+        <img src="{{ asset('photos/' ~ participant.ImgName) }}" alt="Photo de profil">
+    {% endif %}
     <p>Nom : {{ participant.lastname }}</p>
     <p>Prénom : {{ participant.firstname }}</p>
     <p>Email : {{ participant.email }}</p>
