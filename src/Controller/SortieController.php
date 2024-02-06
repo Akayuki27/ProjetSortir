@@ -24,8 +24,11 @@ class SortieController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $sortie->setOrganisateur($this->getUser());
             $sortie->addParticipant($sortie->getOrganisateur());
+            //sauvegarde en base de données
             $entityManager->persist($sortie);
             $entityManager->flush();
+            //message de succès et redirection vers liste de sorties
+            $this->addFlash('success', 'Sortie ajoutée! Good job!');
             return $this->redirectToRoute('sortie_list');
         }
 

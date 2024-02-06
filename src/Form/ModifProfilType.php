@@ -30,7 +30,7 @@ class ModifProfilType extends AbstractType
                 'class' => Campus::class,
 'choice_label' => 'nom',
             ])
-            ->add('ImgName', FileType::class, [
+            ->add('imgName', FileType::class, [
                 'required' => false,
                 'data_class'=> null,
             ])

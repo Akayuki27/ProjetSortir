@@ -29,11 +29,11 @@ class ProfilController extends AbstractController
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             // Gérer le téléchargement de la photo
-            $photoFile = $form->get('ImgName')->getData();
+            $photoFile = $form->get('imgName')->getData();
             if ($photoFile) {
                 // Renommer et déplacer le fichier téléchargé
                 $newFileName = md5(uniqid()).'.'.$photoFile->guessExtension();
-                $photoFile->move($this->getParameter('img'), $newFileName);
+                $photoFile->move($this->getParameter('photos'), $newFileName);
 
                 // Mettre à jour le nom de fichier de la photo dans l'entité Participant
                 $user->setImgName($newFileName);
@@ -42,6 +42,7 @@ class ProfilController extends AbstractController
             $em->flush();
 
             // Rediriger l'utilisateur vers une autre page après la modification
+            $this->addFlash('success', 'Profil modifié! Good job!');
             return $this->redirectToRoute('app_main');
         }
 
