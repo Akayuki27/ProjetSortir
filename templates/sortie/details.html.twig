@@ -22,5 +22,6 @@
         {% endfor %}
         </ul>
         <p>Nombre de participants: {{ sortie.participants | length }}</p>
+        <a href="{{ path('sortie_inscription', {'id': sortie.id}) }}" title="Inscription">S'inscrire</a>
     </div>
 {% endblock %}

@@ -8,6 +8,7 @@ use App\Form\SortieType;
 use App\Repository\EtatRepository;
 use App\Repository\SortieRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use phpDocumentor\Reflection\Types\This;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -57,6 +58,38 @@ class SortieController extends AbstractController
             'today' => $today
         ]);
     }
+
+    #[Route('/inscription/{id}', name: 'inscription')]
+    public function inscription(SortieRepository $repository, EntityManagerInterface $entityManager, int $id): Response
+    {
+        // Récupérer la sortie à laquelle l'utilisateur souhaite s'inscrire
+        $sortie = $repository->find($id);
+        $user = $this->getUser();
+
+        if (!$sortie) {
+            throw $this->createNotFoundException('La sortie demandée n\'existe pas');
+        }
+
+        if ($sortie->getParticipants()->contains($user)) {
+            $this->addFlash('danger', 'Vous êtes déjà inscrit à cette sortie !' );
+            return $this->redirectToRoute('sortie_details', ['id'=>$sortie->getId()]);
+        }
+
+        if ($sortie->getNbInscriptionMax() <= $sortie->getParticipants()->count()) {
+            $this->addFlash('danger', 'Désolé le nombre maximum de participants a été atteint !');
+            return $this->redirectToRoute('sortie_details', ['id'=>$sortie->getId()]);
+        }
+
+        // Ajouter l'utilisateur à la liste des participants de la sortie
+        $sortie->addParticipant($user);
+
+        // Enregistrer les modifications dans la base de données
+        $entityManager->flush();
+
+        $this->addFlash('success', 'Vous avez été inscrit à cette sortie avec succès !');
+        return $this->redirectToRoute('sortie_details', ['id'=>$sortie->getId()]);
+    }
+
 
     #[Route('/modifier/{id}', name: 'modifier')]
     public function modifier(SortieRepository $repository,
