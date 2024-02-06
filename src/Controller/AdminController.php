@@ -66,15 +66,25 @@ class AdminController extends AbstractController
                     $entityManager->flush();
                 }
                 break;
+            case 'modifier':
+                $campusId = $request->query->get('id');
+                $campus = $campusRepository->find($campusId);
+                $nouveauNom = $request->request->get('nouveau_nom');
+                if ($campus && $nouveauNom) {
+                    $campus->setNom($nouveauNom);
+                    $entityManager->persist($campus);
+                    $entityManager->flush();
+                }
+                break;
             default:
-                // Afficher la liste des campus avec le formulaire de filtre
+                //liste des campus avec le formulaire de filtre
                 $form = $this->createForm(CampusFiltreType::class);
                 $form->handleRequest($request);
 
                 $campuses = [];
                 if ($form->isSubmitted() && $form->isValid()) {
                     $data = $form->getData();
-                    $campuses = $campusRepository->rechercherParNom($data['nom']);
+                    $campuses = $campusRepository->rechercherParNom($data->getNom());
                 } else {
                     $campuses = $campusRepository->findAll();
                 }
@@ -95,5 +105,6 @@ class AdminController extends AbstractController
         $entityManager->flush();
         return $this->redirectToRoute('app_admin_campus');
     }
+
 
 }
