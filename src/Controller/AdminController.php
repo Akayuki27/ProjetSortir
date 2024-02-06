@@ -4,10 +4,14 @@ namespace App\Controller;
 
 
 use App\Repository\VilleRepository;
+
 use App\Entity\Campus;
 use App\Form\CampusFiltreType;
 use App\Repository\CampusRepository;
 use Doctrine\ORM\EntityManagerInterface;
+
+use App\Entity\Ville;
+use App\Form\AjoutVilleType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -17,12 +21,25 @@ use Symfony\Component\Routing\Attribute\Route;
 class AdminController extends AbstractController
 {
 
-    #[Route('/villes', name: '_villes')]
-    public function list(VilleRepository $villeRepository): Response
+    #[Route('/villes', name: '_villes' )]
+    public function list(VilleRepository $villeRepository, Request $request, EntityManagerInterface $em): Response
     {
         $villes = $villeRepository->findAll();
+
+        $ville = new Ville();
+        $ajoutVille = $this->createForm(AjoutVilleType::class,$ville);
+        $ajoutVille ->handleRequest($request);
+        if($ajoutVille -> isSubmitted() && $ajoutVille->isValid())
+        {
+            $em ->persist($ville);
+            $em ->flush();
+            //$this ->addFlash('succes','Ville ajoutée avec succès');
+
+            return $this->redirectToRoute('app_admin_villes', ['villes'=>$villes]);
+        }
+
         return $this->render('admin/villes.html.twig', [
-            'villes'=>$villes
+            'villes'=>$villes, 'ajoutVille'=>$ajoutVille
         ]);
     }
 
@@ -30,7 +47,7 @@ class AdminController extends AbstractController
     public function campus(CampusRepository $CampusRepository,EntityManagerInterface $entityManager): Response
     {
         $campuses = $CampusRepository->findAll();
-        return $this->render('campus.html.twig', ["campuses"=>$campuses]);
+        return $this->render('admin/campus.html.twig', ["campuses"=>$campuses]);
     }
 
     #[Route('/campus/{id}/supprimer', name: '_campus_supprimer')]
@@ -57,7 +74,7 @@ class AdminController extends AbstractController
         return $this->redirectToRoute('app_admin_campus');
     }
 
-    #[Route('/campus/ajouter', name: '_campus_filtre')]
+    #[Route('/campus/filtre', name: '_campus_filtre')]
     public function filtreCampus(Request $request, EntityManagerInterface $entityManager): Response
     {
         //instance et soumission

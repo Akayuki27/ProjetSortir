@@ -4,10 +4,18 @@
 
     <h1>Gérer les villes</h1>
     <div>
-        <div>Campus</div>
+        <div>Villes</div>
+        {{ form_start(ajoutVille) }}
+        {{ form_widget(ajoutVille.nom) }}
+        {{ form_widget(ajoutVille.codePostal) }}
+        <button>Ajouter</button>
+        {{ form_end(ajoutVille) }}
+
     {% for ville in villes %}
         <div>
+
             {{ ville.nom }}
+            {{ ville.codePostal }}
             <a href="">Modifier</a> - <a href="">Supprimer</a>
         </div>
     {% endfor %}

@@ -21,20 +21,19 @@ class VilleRepository extends ServiceEntityRepository
         parent::__construct($registry, Ville::class);
     }
 
-//    /**
-//     * @return Ville[] Returns an array of Ville objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('v')
-//            ->andWhere('v.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('v.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
+    /**
+     * @return Ville[] Returns an array of Ville objects
+     */
+    public function findByNom($value): array
+    {
+        return $this->createQueryBuilder('v')
+            ->andWhere('v.nom = :val')
+            ->setParameter('val', $value)
+            ->orderBy('v.id', 'ASC')
+            ->getQuery()
+           ->getResult()
+        ;
+    }
 
 //    public function findOneBySomeField($value): ?Ville
 //    {
