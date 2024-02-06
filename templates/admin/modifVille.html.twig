@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<h1>Modification de la ville {{ ville.nom }}</h1>
+    <div>
+        {{ form_start(form) }}
+        {{ form_widget(form) }}
+        <button class="btn btn-primary">Modifier</button>
+        {{ form_end(form) }}
+    </div>
+
+{% endblock %}
+
+{% block title %}
+{{ ville.nom }}
+{% endblock %}
+

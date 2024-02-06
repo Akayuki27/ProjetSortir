@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 
+use App\Form\ModifVilleType;
 use App\Form\VillesFiltreType;
 use App\Repository\VilleRepository;
 
@@ -126,5 +127,21 @@ class AdminController extends AbstractController
         return $this->redirectToRoute('app_admin_campus');
     }
 
+    #[Route('/villes/modifier/{id}', name: '_villes_modifier' )]
+    public function mofifierVille(EntityManagerInterface $entityManager,
+                                  int $id,
+                                  VilleRepository $villeRepository,
+                                    Request $request) {
+        $ville = $villeRepository->find($id);
+        $form = $this->createForm(ModifVilleType::class, $ville);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager->flush();
+            $this->addFlash('success', 'Modification effectuée!');
+            return $this->redirectToRoute('app_admin_villes');
+        }
+        return $this->render('admin/modifVille.html.twig', [
+        'form' => $form, 'ville' => $ville]);
+    }
 
 }
