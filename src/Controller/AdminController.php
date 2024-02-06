@@ -117,7 +117,6 @@ class AdminController extends AbstractController
             return $this->render('admin/campus.html.twig', ['campuses' => $campuses]);
         }else{
             return $this->redirectToRoute('app_admin_campus');
-            //return $this->render('admin/campus.html.twig');
         }
     }
 

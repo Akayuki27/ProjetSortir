@@ -15,18 +15,11 @@
         <button type="submit">Ajouter</button>
     </form>
 
-
-    {# formulaire de filtre
-    {{ form_start(form) }}
-    {{ form_row(form.nom) }}
-    {{ form_row(form.rechercher) }}
-    {{ form_end(form) }}#}
-
-
-    {# formulaire de filtre V2 #}
-    <form action="{{ path('app_admin_campus', {'action': 'filtrer'}) }}" method="get">
+    {# formulaire de filtre #}
+    <form action="{{ path('app_admin_campus') }}" method="get">
+        <input type="hidden" name="action" value="filtrer">
         <input type="text" name="filtrer" placeholder="">
-        <button type="submit">Rechercher V2</button>
+        <button type="submit">Rechercher</button>
     </form>
 
      {% if campuses is not empty %}
