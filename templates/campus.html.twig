@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Campus{% endblock %}
+{% block titrepage %}
+    <div class="title-container">
+        <h1>Gestion des Campus</h1>
+    </div>
+{% endblock %}
+{% block body %}
+
+    {#formulaire d'ajout #}
+    <form action="{{ path('app_admin_campus_ajouter') }}" method="post">
+        <label for="nom">Nouveau campus :</label>
+        <input type="text" id="nom" name="nom" required>
+        <button type="submit">Ajouter</button>
+    </form>
+
+    {#formulaire de filtre #}
+    {{ form_start(form) }}
+    {{ form_row(form.nom) }}
+    {{ form_row(form.rechercher) }}
+    {{ form_end(form) }}
+
+    {% if campuses is not empty %}
+        <ul>
+            {# Boucle à travers chaque campus / pas de filtre #}
+            {% for campus in campuses %}
+                <li>
+                    {{ campus.nom }}
+                    {# penser a modifier le path !!!!!!!
+                    <a href="{{ path('/', {'id': campus.id}) }}">Modifier</a>#}
+                    <a href="{{ path('app_admin_campus_supprimer', {'id': campus.id}) }}"
+                       onclick="return confirm('Êtes-vous sûr de vouloir anéantir ce campus ?')">Supprimer</a>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>Aucun campus trouvé !</p>
+    {% endif %}
+
+
+{% endblock %}
+
