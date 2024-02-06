@@ -37,11 +37,10 @@ class RegistrationController extends AbstractController
             if ($photoFile) {
                 // Renommer et déplacer le fichier téléchargé
                 $newFileName = md5(uniqid()).'.'.$photoFile->guessExtension();
-                $photoFile->move($this->getParameter('img'), $newFileName);
+                $photoFile->move($this->getParameter('photos'), $newFileName);
 
                 // Mettre à jour le nom de fichier de la photo dans l'entité Participant
-                $participant->setImgName($newFileName);
-
+                $user->setImgName($newFileName);
             }
 
             $entityManager->persist($user);
