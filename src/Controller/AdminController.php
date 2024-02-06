@@ -2,14 +2,12 @@
 
 namespace App\Controller;
 
-<<<<<<< Updated upstream
+
 use App\Repository\VilleRepository;
-=======
 use App\Entity\Campus;
 use App\Form\CampusFiltreType;
 use App\Repository\CampusRepository;
 use Doctrine\ORM\EntityManagerInterface;
->>>>>>> Stashed changes
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
