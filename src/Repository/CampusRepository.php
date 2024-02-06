@@ -31,7 +31,7 @@ class CampusRepository extends ServiceEntityRepository
         $qb = $this->createQueryBuilder('c');
 
         //si y a quelque chose d'ecrit on ajoute le WHERE
-        if ($nom !== null) {
+        if ($nom !=null) {
             $qb->andWhere('c.nom LIKE :nom')
                 ->setParameter('nom', '%'.$nom.'%');
         }
