@@ -123,4 +123,34 @@ class SortieController extends AbstractController
         $this->addFlash('success', 'Sortie supprimée!');
         return $this->redirectToRoute('sortie_list');
     }
+
+    #[Route('/desister/{id}', name: 'desister')]
+    public function desister(SortieRepository $repository, EntityManagerInterface $entityManager, int $id): Response
+    {
+        // Récupérer la sortie à laquelle l'utilisateur souhaite s'inscrire
+        $sortie = $repository->find($id);
+        $user = $this->getUser();
+
+        if (!$sortie) {
+            throw $this->createNotFoundException('La sortie demandée n\'existe pas');
+        }
+
+        if ($sortie->getParticipants()->contains($user)) {
+            // Retirer l'utilisateur de la liste des participants de la sortie
+            $sortie->removeParticipant($user);
+
+            // Enregistrer les modifications dans la base de données
+            $entityManager->flush();
+
+            $this->addFlash('success', 'Vous avez été retiré de cette sortie avec succès !');
+            return $this->redirectToRoute('sortie_details', ['id'=>$sortie->getId()]);
+        }
+
+
+        // Enregistrer les modifications dans la base de données
+        $entityManager->flush();
+
+        $this->addFlash('success', 'Vous avez été enlevé de cette sortie avec succès !');
+        return $this->redirectToRoute('sortie_details', ['id'=>$sortie->getId()]);
+    }
 }
