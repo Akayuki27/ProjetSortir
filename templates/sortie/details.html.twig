@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ sortie.nom }}{% endblock %}
+
+{% block body %}
+    <h1>{{ sortie.nom }}</h1>
+    <div>
+        <p>Lieu: {{ sortie.lieu.nom }}</p>
+        <p>Durée: {{ sortie.duree }}</p>
+        {% if (sortie.dateLimiteInscription < today) %}
+        <p>Date limite d'inscription: {{ sortie.dateLimiteInscription | date }}</p>
+        {% else %}
+        <p>Inscriptions cloturées</p>
+        {% endif %}
+        <p>Concernant la sortie: {{ sortie.infosSortie }}</p>
+    </div>
+    <div>
+        <ul>
+        {% for participant in sortie.participants %}
+           <li>{{ participant.lastname | upper }} {{ participant.firstname }}</li>
+        {% endfor %}
+        </ul>
+    </div>
+{% endblock %}

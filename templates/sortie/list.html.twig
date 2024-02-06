@@ -1,13 +1,13 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello SortieController!{% endblock %}
+{% block title %}Liste des sorties{% endblock %}
 
 {% block body %}
     <h1>Liste des sorties</h1>
 <div>
     {% for sortie in sorties %}
     <div>
-        <p>{{ sortie.nom }} à {{ sortie.lieu.nom }}</p>
+        <a href="{{ path('sortie_details', {'id':sortie.id}) }}" title="details">{{ sortie.nom }} à {{ sortie.lieu.nom }}</a>
     </div>
     {% endfor %}
 </div>
