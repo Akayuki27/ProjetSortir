@@ -124,6 +124,29 @@ class SortieController extends AbstractController
         return $this->redirectToRoute('sortie_list');
     }
 
+    #[Route('/annuler/{id}', name: 'annuler')]
+    public function annuler(SortieRepository $repository,
+                             EtatRepository $etatRepository,
+                             int $id,
+                             Request $request,
+                             EntityManagerInterface $entityManager): Response
+    {
+        $sortie = $repository->find($id);
+        $form = $this->createForm(ModifSortieType::class, $sortie);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $sortie->setEtat($etatRepository->findOneBy(['libelle' => 'annulée']));
+            $entityManager->flush();
+            $this->addFlash('success', 'Sortie annulée!');
+            return $this->redirectToRoute('sortie_list');
+        }
+        return $this->render('sortie/annuler.html.twig', [
+            'sortie' => $sortie,
+            'form' => $form
+
+        ]);
+    }
+
     #[Route('/desister/{id}', name: 'desister')]
     public function desister(SortieRepository $repository, EntityManagerInterface $entityManager, int $id): Response
     {
@@ -145,8 +168,6 @@ class SortieController extends AbstractController
             $this->addFlash('success', 'Vous avez été retiré de cette sortie avec succès !');
             return $this->redirectToRoute('sortie_details', ['id'=>$sortie->getId()]);
         }
-
-
         // Enregistrer les modifications dans la base de données
         $entityManager->flush();
 

@@ -17,11 +17,11 @@ class ModifSortieType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            //->add('dateHeureDebut')
-            //->add('duree')
-            //->add('dateLimiteInscription')
-            //->add('nbInscriptionMax')
-            //->add('infosSortie')
+            ->add('dateHeureDebut')
+            ->add('duree')
+            ->add('dateLimiteInscription')
+            ->add('nbInscriptionMax')
+            ->add('infosSortie')
             //->add('participants', EntityType::class, [
               //  'class' => Participant::class,
 //'choice_label' => 'id',
@@ -32,10 +32,14 @@ class ModifSortieType extends AbstractType
                 'class' => Etat::class,
 'choice_label' => 'libelle',
             ])
-            //->add('Lieu', EntityType::class, [
-              //  'class' => Lieu::class,
-//'choice_label' => 'id',
-  //          ])
+            ->add('campus', EntityType::class, [
+                'class' => Campus::class,
+                'choice_label' => 'nom',
+            ])
+            ->add('Lieu', EntityType::class, [
+                'class' => Lieu::class,
+'choice_label' => 'nom',
+            ])
         ;
     }
 

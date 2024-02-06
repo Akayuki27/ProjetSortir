@@ -10,6 +10,9 @@
 
     {{ form_start(form) }}
     {{ form_widget(form) }}
+    <p>Rue: {{ sortie.lieu.rue }}</p>
+    <p>Code Postal: {{ sortie.lieu.ville.codePostal }}</p>
+    </br>
     <button>Modifier</button>
     {{ form_end(form) }}
 {% endblock %}
