@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <h1>Gérer les villes</h1>
+    <div>
+        <div>Campus</div>
+    {% for ville in villes %}
+        <div>
+            {{ ville.nom }}
+            <a href="">Modifier</a> - <a href="">Supprimer</a>
+        </div>
+    {% endfor %}
+    </div>
+
+{% endblock %}
+
+{% block title %}
+Villes
+{% endblock %}
+
