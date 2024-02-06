@@ -24,28 +24,28 @@
 
 
     {# formulaire de filtre V2 #}
-    <form action="{{ path('app_admin_campus', {'action': 'filtrer'}) }}" method="post">
+    <form action="{{ path('app_admin_campus', {'action': 'filtrer'}) }}" method="get">
         <input type="text" name="filtrer" placeholder="">
         <button type="submit">Rechercher V2</button>
     </form>
 
-    {% if campuses is not empty %}
-        <ul>
-            {# Boucle à travers chaque campus / pas de filtre #}
-            {% for campus in campuses %}
-                <li>
-                    {{ campus.nom }}
-                    {# Formulaire de modification de nom de campus #}
-                    <form action="{{ path('app_admin_campus', {'action': 'modifier', 'id': campus.id}) }}" method="post">
-                        <input type="text" name="nouveau_nom" placeholder="{{ campus.nom }}">
-                        <button type="submit">Modifier</button>
-                    </form>
-                    {# Lien de suppression #}
-                    <a href="{{ path('app_admin_campus_supprimer', {'id': campus.id}) }}"
-                       onclick="return confirm('Êtes-vous sûr de vouloir anéantir ce campus ?')">Supprimer</a>
-                </li>
-            {% endfor %}
-        </ul>
+     {% if campuses is not empty %}
+            <ul>
+                {# Boucle à travers chaque campus / pas de filtre #}
+                {% for campus in campuses %}
+                    <li>
+                        {{ campus.nom }}
+                        {# Formulaire de modification de nom de campus #}
+                        <form action="{{ path('app_admin_campus', {'action': 'modifier', 'id': campus.id}) }}" method="post">
+                            <input type="text" name="nouveau_nom" placeholder="{{ campus.nom }}">
+                            <button type="submit">Modifier</button>
+                        </form>
+                        {# Lien de suppression #}
+                        <a href="{{ path('app_admin_campus_supprimer', {'id': campus.id}) }}"
+                           onclick="return confirm('Êtes-vous sûr de vouloir anéantir ce campus ?')">Supprimer</a>
+                    </li>
+                {% endfor %}
+            </ul>
     {% else %}
         <p>Aucun campus trouvé !</p>
     {% endif %}

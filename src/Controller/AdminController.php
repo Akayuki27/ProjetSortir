@@ -104,35 +104,17 @@ class AdminController extends AbstractController
                 }else{
                     $campuses = $campusRepository->findAll();
                 }
-
-                return $this->render('admin/campus.html.twig', ['campuses' => $campuses]);
+                break;
             default:
                 $campuses = $campusRepository->findAll();
-                /*
-                //liste des campus avec le formulaire de filtre
-                $form = $this->createForm(CampusFiltreType::class);
-                $form->handleRequest($request);
-
-                $campuses = [];
-                if ($form->isSubmitted() && $form->isValid()) {
-                    $data = $form->getData();
-                    $nom = $data->getNom();
-                    dump($nom);
-                    $campuses = $campusRepository->findBy(["nom"=>$nom],[]);
-                    return $this->render('admin/campus.html.twig', ['form' => $form, 'campuses' => $campuses]);
-                } else {
-                    $campuses = $campusRepository->findAll();
-                }
-
-                return $this->render('admin/campus.html.twig', [
-                    'campuses' => $campuses,
-                    'form' => $form->createView(),
-                ]);
-                */
-
         }
-        return $this->render('admin/campus.html.twig', ['campuses' => $campuses]);
-        //return $this->redirectToRoute('app_admin_campus');
+
+        if(isset($campuses)){
+            return $this->render('admin/campus.html.twig', ['campuses' => $campuses]);
+        }else{
+            return $this->redirectToRoute('app_admin_campus');
+            //return $this->render('admin/campus.html.twig');
+        }
     }
 
     #[Route('/campus/{id}/supprimer', name: '_campus_supprimer')]
