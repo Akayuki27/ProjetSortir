@@ -21,6 +21,7 @@
             <img class="logo" src="{{ asset('img/enisortir1.jpg') }}" alt="Logo">
             </div>
             <nav>
+                <a href="{{ path('app_profil', {'id': app.user.id}) }}">Mon Profil</a>
                 <a href="{{ path("sortie_create") }}" title="Ajouter une sortie">Ajouter une sortie</a>
                 <a href="{{ path("sortie_list") }}" title="Sorties">Toutes les sorties</a>
                 <a href="{{ path("app_logout") }}" title="logout">Logout</a>
