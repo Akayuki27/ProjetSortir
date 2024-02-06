@@ -9,7 +9,7 @@
 {% block body %}
 
     {#formulaire d'ajout #}
-    <form action="{{ path('app_admin_campus_ajouter') }}" method="post">
+    <form action="{{ path('app_admin_campus', {'action': 'ajouter'}) }}" method="post">
         <label for="nom">Nouveau campus :</label>
         <input type="text" id="nom" name="nom" required>
         <button type="submit">Ajouter</button>
@@ -19,6 +19,7 @@
     {{ form_start(form) }}
     {{ form_row(form.nom) }}
     {{ form_row(form.rechercher) }}
+    <button type="submit">Rechercher</button>
     {{ form_end(form) }}
 
     {% if campuses is not empty %}

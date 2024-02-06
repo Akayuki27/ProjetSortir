@@ -44,10 +44,48 @@ class AdminController extends AbstractController
     }
 
     #[Route('/campus', name: '_campus')]
-    public function campus(CampusRepository $CampusRepository,EntityManagerInterface $entityManager): Response
+    public function campus(Request $request, CampusRepository $campusRepository, EntityManagerInterface $entityManager): Response
     {
-        $campuses = $CampusRepository->findAll();
-        return $this->render('admin/campus.html.twig', ["campuses"=>$campuses]);
+        $action = $request->query->get('action');
+
+        switch ($action) {
+            case 'supprimer':
+                $campusId = $request->query->get('id');
+                $campus = $campusRepository->find($campusId);
+                if ($campus) {
+                    $entityManager->remove($campus);
+                    $entityManager->flush();
+                }
+                break;
+            case 'ajouter':
+                $nom = $request->request->get('nom');
+                if ($nom) {
+                    $campus = new Campus();
+                    $campus->setNom($nom);
+                    $entityManager->persist($campus);
+                    $entityManager->flush();
+                }
+                break;
+            default:
+                // Afficher la liste des campus avec le formulaire de filtre
+                $form = $this->createForm(CampusFiltreType::class);
+                $form->handleRequest($request);
+
+                $campuses = [];
+                if ($form->isSubmitted() && $form->isValid()) {
+                    $data = $form->getData();
+                    $campuses = $campusRepository->rechercherParNom($data['nom']);
+                } else {
+                    $campuses = $campusRepository->findAll();
+                }
+
+                return $this->render('admin/campus.html.twig', [
+                    'campuses' => $campuses,
+                    'form' => $form->createView(),
+                ]);
+        }
+
+        return $this->redirectToRoute('app_admin_campus');
     }
 
     #[Route('/campus/{id}/supprimer', name: '_campus_supprimer')]
@@ -56,50 +94,6 @@ class AdminController extends AbstractController
         $entityManager->remove($campus);
         $entityManager->flush();
         return $this->redirectToRoute('app_admin_campus');
-    }
-
-    #[Route('/campus/ajouter', name: '_campus_ajouter')]
-    public function ajouterCampus(Request $request, EntityManagerInterface $entityManager): Response
-    {
-        $nom = $request->request->get('nom');
-
-        //nouvelle instance campus
-        $campus = new Campus();
-        $campus->setNom($nom);
-
-        // récup, persist et plouf
-        $entityManager->persist($campus);
-        $entityManager->flush();
-
-        return $this->redirectToRoute('app_admin_campus');
-    }
-
-    #[Route('/campus/filtre', name: '_campus_filtre')]
-    public function filtreCampus(Request $request, EntityManagerInterface $entityManager): Response
-    {
-        //instance et soumission
-        $form = $this->createForm(CampusFiltreType::class);
-        $form->handleRequest($request);
-
-        //validation
-        if ($form->isSubmitted() && $form->isValid()) {
-            $data = $form->getData();
-
-            //filtre
-            $campuses = $entityManager
-                ->getRepository(Campus::class)
-                ->rechercherParNom($data['nom']);
-
-            return $this->render('campus.html.twig', [
-                'campuses' => $campuses,
-                'form' => $form->createView(), //passage du form a twig
-            ]);
-        }
-
-        //si non valide
-        return $this->render('campus.html.twig', [
-            'form' => $form->createView(),
-        ]);
     }
 
 }
