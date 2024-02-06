@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modifier la sortie {{ sortie.nom }}{% endblock %}
+{% block titrepage %}
+    <div class="title-container">
+        <h1>{{ sortie.nom }}</h1>
+    </div>
+{% endblock %}
+{% block body %}
+
+    {{ form_start(form) }}
+    {{ form_widget(form) }}
+    <button>Modifier</button>
+    {{ form_end(form) }}
+{% endblock %}

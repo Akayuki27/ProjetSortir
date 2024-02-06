@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Sortie;
+use App\Form\ModifSortieType;
 use App\Form\SortieType;
 use App\Repository\EtatRepository;
 use App\Repository\SortieRepository;
@@ -55,5 +56,38 @@ class SortieController extends AbstractController
             'sortie' => $sortie,
             'today' => $today
         ]);
+    }
+
+    #[Route('/modifier/{id}', name: 'modifier')]
+    public function modifier(SortieRepository $repository,
+                             int $id,
+                             Request $request,
+                            EntityManagerInterface $entityManager): Response
+    {
+        $sortie = $repository->find($id);
+        $form = $this->createForm(ModifSortieType::class, $sortie);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager->flush();
+            $this->addFlash('success', 'Modification effectuée!');
+            return $this->redirectToRoute('sortie_list');
+        }
+        return $this->render('sortie/modifier.html.twig', [
+            'sortie' => $sortie,
+            'form' => $form
+
+        ]);
+    }
+
+    #[Route('/delete/{id}', name: 'delete')]
+    public function delete(SortieRepository $repository,
+                             int $id,
+                             EntityManagerInterface $entityManager): Response
+    {
+        $sortie = $repository->find($id);
+        $entityManager->remove($sortie);
+        $entityManager->flush();
+        $this->addFlash('success', 'Sortie supprimée!');
+        return $this->redirectToRoute('sortie_list');
     }
 }
