@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 
+use App\Form\VillesFiltreType;
 use App\Repository\VilleRepository;
 
 use App\Entity\Campus;
@@ -24,22 +25,41 @@ class AdminController extends AbstractController
     #[Route('/villes', name: '_villes' )]
     public function list(VilleRepository $villeRepository, Request $request, EntityManagerInterface $em): Response
     {
+
         $villes = $villeRepository->findAll();
 
         $ville = new Ville();
         $ajoutVille = $this->createForm(AjoutVilleType::class,$ville);
         $ajoutVille ->handleRequest($request);
+
+
+        $filtre = $this->createForm(VillesFiltreType::class);
+        $filtre ->handleRequest($request);
+
+
         if($ajoutVille -> isSubmitted() && $ajoutVille->isValid())
         {
             $em ->persist($ville);
             $em ->flush();
             //$this ->addFlash('succes','Ville ajoutée avec succès');
 
-            return $this->redirectToRoute('app_admin_villes', ['villes'=>$villes]);
+            return $this->redirectToRoute('app_admin_villes', ['villes'=>$villes, 'ajoutVille'=>$ajoutVille, 'filtre'=>$filtre]);
         }
 
+        if($filtre -> isSubmitted() && $filtre->isValid())
+        {
+            $data = $filtre->getData();
+            $villesFiltrees = $em;
+            $villesFiltrees->getRepository(Ville::class)
+                ->findByNom($data);
+
+
+            return $this->redirectToRoute('app_admin_villes', ['villes'=>$villesFiltrees, 'ajoutVille'=>$ajoutVille, 'filtre'=>$filtre]);
+        }
+
+
         return $this->render('admin/villes.html.twig', [
-            'villes'=>$villes, 'ajoutVille'=>$ajoutVille
+            'villes'=>$villes, 'ajoutVille'=>$ajoutVille, 'filtre'=>$filtre
         ]);
     }
 

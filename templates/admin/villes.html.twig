@@ -4,12 +4,20 @@
 
     <h1>Gérer les villes</h1>
     <div>
+        {{ form_start(filtre) }}
+        {{ form_label(filtre.nom) }}
+        {{ form_widget(filtre.nom) }}
+        <button>Rechercher</button>
+        {{ form_end(filtre) }}
+    </div>
+    <div>
         <div>Villes</div>
         {{ form_start(ajoutVille) }}
         {{ form_widget(ajoutVille.nom) }}
         {{ form_widget(ajoutVille.codePostal) }}
         <button>Ajouter</button>
         {{ form_end(ajoutVille) }}
+
 
     {% for ville in villes %}
         <div>

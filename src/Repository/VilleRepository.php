@@ -29,7 +29,7 @@ class VilleRepository extends ServiceEntityRepository
         return $this->createQueryBuilder('v')
             ->andWhere('v.nom = :val')
             ->setParameter('val', $value)
-            ->orderBy('v.id', 'ASC')
+            ->orderBy('v.nom', 'ASC')
             ->getQuery()
            ->getResult()
         ;
