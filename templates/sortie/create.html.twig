@@ -1,9 +1,13 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}Nouvelle sortie{% endblock %}
-
+{% block titrepage %}
+    <div class="title-container">
+        <h1>Nouvelle sortie </h1>
+    </div>
+{% endblock %}
 {% block body %}
-    <h1>Nouvelle sortie: </h1>
+
     {{ form_start(form) }}
     {{ form_widget(form) }}
     <button>Add!</button>

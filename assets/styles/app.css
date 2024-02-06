@@ -1,3 +1,72 @@
-body {
-   background-color: pink;
+* {
+   margin: 0;
+   padding: 0;
 }
+
+body {
+   background-color: #111111;
+   color: #ececec;
+   font-family: 'Montserrat', sans-serif;
+}
+
+main {
+   display: flex;
+   flex-direction: column;
+   width: 94%;
+   min-height: 700px;
+   margin: auto;
+   padding-top: 30px;
+   padding-bottom: 30px;
+}
+
+footer {
+   background-color: #282828;
+   height: 60px;
+   color: #5e5e5e;
+}
+
+nav {
+   display: flex;
+   flex-direction: row;
+   justify-content: end;
+   align-items: center;
+   height: 100px;
+   gap: 20px;
+   padding-right: 20px;
+}
+
+a:active, a:hover {
+   color: #154981;
+}
+
+nav a {
+   font-size: 1.2em;
+}
+
+footer p {
+   padding : 20px;
+}
+
+.header-container{
+   display: flex;
+   flex-direction: row;
+   justify-content: space-between;
+   background-color: #282828;
+   height: 100px;
+}
+
+.logo {
+   height: 100px;
+}
+
+.title-container {
+   background-color: #282828;
+   color: #5e5e5e;
+   text-align: center;
+   border-top: 1px solid #5e5e5e;
+   font-size: 0.8em;
+   font-weight: 400;
+}
+
+
+
