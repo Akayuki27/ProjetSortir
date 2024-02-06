@@ -3,43 +3,58 @@
 namespace App\Controller;
 
 use App\Entity\Participant;
+use App\Form\ModifProfilType;
+use App\Repository\ParticipantRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
+use function PHPUnit\Framework\throwException;
 
 #[Route('/profil', name: 'app_profil')]
 class ProfilController extends AbstractController
 {
     #[Route('/modification', name: '_modification')]
-    public function register(Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $entityManager): Response
+    public function register(Request $request,EntityManagerInterface $em): Response
     {
-        $user = new Participant();
-        $form = $this->createForm(RegistrationFormType::class, $user);
+        // Récupérer l'utilisateur connecté
+        $user = $this->getUser();
+
+        $pseudo = $this->getUser() ? $this->getUser()->getPseudo() : null;
+
+        // Créer le formulaire en passant l'entité Participant
+        $form = $this->createForm(ModifProfilType::class, $user, ['pseudo' => $pseudo]);
+
+        // Traitement du formulaire soumis
         $form->handleRequest($request);
-
         if ($form->isSubmitted() && $form->isValid()) {
-            // encode the plain password
-            $user->setPassword(
-                $userPasswordHasher->hashPassword(
-                    $user,
-                    $form->get('plainPassword')->getData()
-                )
-            );
+            // Enregistrer les modifications dans la base de données
+            $em->persist($user);
+            $em->flush();
 
-            $user->setActive(true);
-
-            $entityManager->persist($user);
-            $entityManager->flush();
-            // do anything else you need here, like send an email
-
+            // Rediriger l'utilisateur vers une autre page après la modification
             return $this->redirectToRoute('app_main');
         }
 
-        return $this->render('registration/register.html.twig', [
-            'registrationForm' => $form->createView(),
+        // Afficher le formulaire dans le template Twig
+        return $this->render('profil/modification.html.twig', [
+            'modificationProfil' => $form->createView(),
+        ]);
+    }
+
+    #[Route('/{id}', name: '')]
+    public function afficherProfil(Request $request,EntityManagerInterface $em, ParticipantRepository $participant, $id): Response
+    {
+       $participant = $participant->find($id);
+
+       if (!$participant) {
+           throw $this->createNotFoundException('Profile not found');
+       }
+
+        // Afficher le formulaire dans le template Twig
+        return $this->render('profil/afficher.html.twig', [
+            'participant' => $participant
         ]);
     }
 }

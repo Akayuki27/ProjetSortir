@@ -21,21 +21,14 @@ class ModifProfilType extends AbstractType
                     'placeholder' => $options['pseudo'] ?: 'Entrez votre pseudo',
                 ],
             ])
-            ->add('roles')
-            ->add('password')
             ->add('lastname')
             ->add('firstname')
             ->add('phoneNumber')
             ->add('email')
             ->add('active')
-            ->add('estInscrit', EntityType::class, [
-                'class' => Sortie::class,
-'choice_label' => 'id',
-'multiple' => true,
-            ])
             ->add('estRattacheA', EntityType::class, [
                 'class' => Campus::class,
-'choice_label' => 'id',
+'choice_label' => 'nom',
             ])
         ;
     }
@@ -47,4 +40,6 @@ class ModifProfilType extends AbstractType
             'pseudo' => null,
         ]);
     }
+
+
 }
