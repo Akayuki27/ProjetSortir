@@ -15,10 +15,12 @@
         <p>Concernant la sortie: {{ sortie.infosSortie }}</p>
     </div>
     <div>
+        <h2>Liste des participants</h2>
         <ul>
         {% for participant in sortie.participants %}
            <li>{{ participant.lastname | upper }} {{ participant.firstname }}</li>
         {% endfor %}
         </ul>
+        <p>Nombre de participants: {{ sortie.participants | length }}</p>
     </div>
 {% endblock %}
