@@ -4,6 +4,8 @@ namespace App\Repository;
 
 use App\Entity\Ville;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\AbstractQuery;
+use Doctrine\ORM\Query;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -26,13 +28,13 @@ class VilleRepository extends ServiceEntityRepository
      */
     public function findByNom($value): array
     {
-        return $this->createQueryBuilder('v')
-            ->andWhere('v.nom = :val')
-            ->setParameter('val', $value)
-            ->orderBy('v.nom', 'ASC')
-            ->getQuery()
-           ->getResult()
-        ;
+
+        $qb = $this->createQueryBuilder('c');
+
+            $qb->andWhere('c.nom LIKE :nom')
+                ->setParameter('nom', '%'.$value.'%');
+
+        return $qb->getQuery()->getResult();
     }
 
 //    public function findOneBySomeField($value): ?Ville

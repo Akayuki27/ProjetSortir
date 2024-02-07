@@ -3,13 +3,16 @@
 {% block body %}
 
     <h1>Gérer les villes</h1>
+
     <div>
-        {{ form_start(filtre) }}
-        {{ form_label(filtre.nom) }}
-        {{ form_widget(filtre.nom) }}
-        <button>Rechercher</button>
-        {{ form_end(filtre) }}
+        {# formulaire de filtre #}
+        <form action="{{ path('app_admin_villes') }}" method="get">
+            <input type="hidden" name="action" value="filtrer">
+            <input type="text" name="filtrer" placeholder="">
+            <button type="submit">Rechercher</button>
+        </form>
     </div>
+
     <div>
         <div>Villes</div>
         {{ form_start(ajoutVille) }}

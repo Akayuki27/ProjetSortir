@@ -18,6 +18,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use function PHPUnit\Framework\isEmpty;
 
 #[Route('/admin', name: 'app_admin')]
 class AdminController extends AbstractController
@@ -26,42 +27,47 @@ class AdminController extends AbstractController
     #[Route('/villes', name: '_villes' )]
     public function list(VilleRepository $villeRepository, Request $request, EntityManagerInterface $em): Response
     {
-
-        $villes = $villeRepository->findAll();
-
         $ville = new Ville();
         $ajoutVille = $this->createForm(AjoutVilleType::class,$ville);
         $ajoutVille ->handleRequest($request);
 
-
         $filtre = $this->createForm(VillesFiltreType::class);
         $filtre ->handleRequest($request);
-
+        $action = $request->query->get('action');
+        $villes = $villeRepository->findAll();
 
         if($ajoutVille -> isSubmitted() && $ajoutVille->isValid())
         {
+
             $em ->persist($ville);
             $em ->flush();
             //$this ->addFlash('succes','Ville ajoutée avec succès');
+            return $this->redirectToRoute('app_admin_villes', [
+                    'villes'=>$villes, 'ajoutVille'=>$ajoutVille
 
-            return $this->redirectToRoute('app_admin_villes', ['villes'=>$villes, 'ajoutVille'=>$ajoutVille, 'filtre'=>$filtre]);
+                ]
+            );
+
         }
 
-        if($filtre -> isSubmitted() && $filtre->isValid())
+        if($action)
         {
-            $data = $filtre->getData();
-            $villesFiltrees = $em;
-            $villesFiltrees->getRepository(Ville::class)
-                ->findByNom($data);
 
-
-            return $this->redirectToRoute('app_admin_villes', ['villes'=>$villesFiltrees, 'ajoutVille'=>$ajoutVille, 'filtre'=>$filtre]);
+            $data = $request->query->get('filtrer');
+            if ($data) {
+                $villes = $villeRepository->findBy(['nom' => $data]);
+            }else {
+                $villes = $villeRepository->findAll();
+            }
         }
 
 
         return $this->render('admin/villes.html.twig', [
-            'villes'=>$villes, 'ajoutVille'=>$ajoutVille, 'filtre'=>$filtre
-        ]);
+            'villes'=>$villes, 'ajoutVille'=>$ajoutVille
+
+        ]
+        );
+
     }
 
     #[Route('/campus', name: '_campus')]
