@@ -29,7 +29,7 @@ class AdminController extends AbstractController
         $ville = new Ville();
         $ajoutVille = $this->createForm(AjoutVilleType::class,$ville);
         $ajoutVille ->handleRequest($request);
-        
+
         $action = $request->query->get('action');
         $villes = $villeRepository->findAll();
 
@@ -66,6 +66,15 @@ class AdminController extends AbstractController
         );
 
     }
+
+    #[Route('/villes/{id}/supprimer', name: '_villes_supprimer')]
+    public function supprimerVilles(Request $request,Ville $ville, EntityManagerInterface $entityManager): Response
+    {
+        $entityManager->remove($ville);
+        $entityManager->flush();
+        return $this->redirectToRoute('app_admin_villes');
+    }
+
 
     #[Route('/campus', name: '_campus')]
     public function campus(Request $request, CampusRepository $campusRepository, EntityManagerInterface $entityManager): Response
