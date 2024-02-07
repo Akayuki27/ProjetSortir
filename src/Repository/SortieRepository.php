@@ -2,15 +2,11 @@
 
 namespace App\Repository;
 
-use App\Controller\SortieController;
 use App\Data\SearchData;
-use App\Entity\Participant;
 use App\Entity\Sortie;
-use Couchbase\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
-use Symfony\Component\Security\Csrf\TokenStorage\TokenStorageInterface;
+
 
 /**
  * @extends ServiceEntityRepository<Sortie>
