@@ -14,5 +14,7 @@
     <p>Nom : {{ participant.lastname }}</p>
     <p>Prénom : {{ participant.firstname }}</p>
     <p>Email : {{ participant.email }}</p>
+    {% if app.user == participant %}
     <a href="{{ path('app_profil_modification') }}">Modifier mon profil</a>
+{% endif %}
 {% endblock %}
