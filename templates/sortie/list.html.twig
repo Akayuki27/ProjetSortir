@@ -8,19 +8,57 @@
 {% endblock %}
 {% block body %}
     <h1>Liste des sorties</h1>
-    <div>
+    <div class="form-super-container">
         {# formulaire de recherche #}
+        {{ form_errors(form) }}
         {{ form_start(form) }}
-        {{ form_widget(form) }}
+    <div class="form-container">
 
+    <div class="form-item">
+        {{ form_label(form.campus) }}
+        {{ form_widget(form.campus) }}
+    </div>
+        <div class="form-item">
+            {{ form_label(form.q) }}
+            {{ form_widget(form.q) }}
+        </div>
+        <div class="form-item">
+            {{ form_label(form.min) }}
+            {{ form_widget(form.min) }}
+        </div>
+        <div class="form-item">
+            {{ form_label(form.max) }}
+            {{ form_widget(form.max) }}
+        </div>
+        <div class="form-item">
+            {{ form_label(form.organisateur) }}
+            {{ form_widget(form.organisateur) }}
+        </div>
+        <div class="form-item">
+            {{ form_label(form.inscrit) }}
+            {{ form_widget(form.inscrit) }}
+        </div>
+        <div class="form-item">
+            {{ form_label(form.nonInscrit) }}
+            {{ form_widget(form.nonInscrit) }}
+        </div>
+        <div class="form-item">
+            {{ form_label(form.passe) }}
+            {{ form_widget(form.passe) }}
+        </div>
 
-        <button type="submit">Rechercher</button>
+        <button type="submit" class="btn">Rechercher</button>
+    </div>
         {{ form_end(form) }}
     </div>
-<div>
+<div class="profil-container">
     {% for sortie in sorties %}
     <div class="container">
-        <a href="{{ path('sortie_details', {'id':sortie.id}) }}" title="details">{{ sortie.nom }} à {{ sortie.lieu.nom }}</a>
+        <a href="{{ path('sortie_details', {'id':sortie.id}) }}" title="details">{{ sortie.nom }}</a>
+        <p>Lieu: {{ sortie.lieu.nom }}</p>
+        <p>Date de la sortie: {{ sortie.dateHeureDebut | date }}</p>
+        <p>Nombre d'inscrits: {{ sortie.participants | length }}/{{ sortie.nbInscriptionMax }}</p>
+        <p>Clôture des inscriptions: {{ sortie.dateLimiteInscription | date }}</p>
         {% if is_granted("ROLE_ADMIN") or app.user == sortie.organisateur %}
         <a href="{{ path('sortie_modifier', {'id':sortie.id}) }}" title="modifier">Modifier</a>
         <a href="{{ path('sortie_annuler', {'id':sortie.id}) }}" title="annuler">Annuler la sortie</a>
