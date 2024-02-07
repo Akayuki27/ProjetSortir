@@ -9,6 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: ParticipantRepository::class)]
 #[UniqueEntity(fields: ['pseudo'], message: 'There is already an account with this pseudo')]
@@ -38,6 +39,8 @@ class Participant implements UserInterface, PasswordAuthenticatedUserInterface
     private ?string $firstname = null;
 
     #[ORM\Column(length: 10)]
+    #[Assert\Regex('/^\d{10}/')]
+    #[Assert\Length(min: 10, max: 10, minMessage: 'Pas moins de 10 chiffres', maxMessage: 'Pas plus de 10 chiffres')]
     private ?string $phoneNumber = null;
 
     #[ORM\Column(length: 255)]
