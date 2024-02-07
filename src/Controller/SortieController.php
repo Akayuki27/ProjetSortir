@@ -6,6 +6,7 @@ use App\Data\SearchData;
 use App\Entity\Lieu;
 use App\Entity\Sortie;
 use App\Entity\Ville;
+use App\Form\LieuType;
 use App\Form\ModifSortieType;
 use App\Form\SearchForm;
 use App\Form\SortieType;
@@ -25,46 +26,19 @@ class SortieController extends AbstractController
     #[Route('/create', name: 'create')]
     public function create(Request $request, EntityManagerInterface $entityManager): Response
     {
-        $action = $request->query->get('action');
 
         $sortie = new Sortie();
         $form = $this->createForm(SortieType::class, $sortie);
         $form->handleRequest($request);
-
         if ($form->isSubmitted() && $form->isValid()) {
             $sortie->setOrganisateur($this->getUser());
             $sortie->addParticipant($sortie->getOrganisateur());
 
-            //sauvegarde en base de données
+            //sauvegarde et redirection
             $entityManager->persist($sortie);
             $entityManager->flush();
-            //message de succès et redirection vers liste de sorties
             $this->addFlash('success', 'Sortie ajoutée! Good job!');
             return $this->redirectToRoute('sortie_list');
-        }
-
-        //form en plus pour création d'un nouveau lieu
-        if ($action){
-            $data = $request->query->get('newLieu');
-            dump($action);
-
-            //creation du lieu
-            $lieu = new Lieu();
-            $lieu->setNom($data);
-            $lieu->setRue($data['rue']);
-            $lieu->setLatitude($data['latitude']);
-            $lieu->setLongitude($data['longitude']);
-
-            //lier le lieu a une ville de la bdd
-            $villeId = $data['ville'];
-            $ville = $entityManager->getRepository(Ville::class)->find($villeId);
-            $lieu->setVille($ville);
-
-            $entityManager->persist($lieu);
-            $entityManager->flush();
-
-            // Ajout du nouveau lieu au formulaire pour la sélection
-            $form->get('Lieu')->setData($lieu);
         }
 
         //pour choper les villes dans la bdd et renvoyer a la vue
@@ -72,6 +46,28 @@ class SortieController extends AbstractController
 
         return $this->render('sortie/create.html.twig', [
             'form' => $form,
+            'villes' => $villes
+        ]);
+    }
+
+    #[Route('/lieu', name: 'lieu')]
+    public function lieu(Request $request, EntityManagerInterface $entityManager): Response
+    {
+        $newLieu = new Lieu();
+        $lieuForm = $this->createForm(LieuType::class, $newLieu);
+        $lieuForm->handleRequest($request);
+        if ($lieuForm->isSubmitted() && $lieuForm->isValid()) {
+            $entityManager->persist($newLieu);
+            $entityManager->flush();
+            $this->addFlash('success', 'Lieu ajouté! Good job!');
+            return $this->redirectToRoute('sortie_create');
+        }
+
+        //pour choper les villes dans la bdd et renvoyer a la vue
+        $villes = $entityManager->getRepository(Ville::class)->findAll();
+
+        return $this->render('sortie/lieu.html.twig', [
+            'lieuForm' => $lieuForm,
             'villes' => $villes
         ]);
     }

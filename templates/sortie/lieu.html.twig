@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Nouvelle sortie{% endblock %}
+{% block titrepage %}
+    <div class="title-container">
+        <h1>Nouvelle sortie </h1>
+    </div>
+{% endblock %}
+{% block body %}
+        <div class="form-super-container">
+            {{ form_errors(lieuForm) }}
+            {{ form_start(lieuForm) }}
+            <div class="form-container">
+                <div class="form-item">
+                    <h2>Création d'un lieu</h2>
+                </div>
+                <div class="form-item">
+                    <p class="precision">Si votre lieu n'est pas dans la liste vous pouvez le créer ici</p>
+                </div>
+                <div class="form-item">
+                    <label for="{{ lieuForm.nom.vars.id }}">Nom du lieu</label>
+                    {{ form_widget(lieuForm.nom) }}
+                </div>
+                <div class="form-item">
+                    <label for="{{ lieuForm.rue.vars.id }}">Rue</label>
+                    {{ form_widget(lieuForm.rue) }}
+                </div>
+                <div class="form-item">
+                    <label for="{{ lieuForm.latitude.vars.id }}">Latitude</label>
+                    {{ form_widget(lieuForm.latitude) }}
+                </div>
+                <div class="form-item">
+                    <label for="{{ lieuForm.longitude.vars.id }}">Longitude</label>
+                    {{ form_widget(lieuForm.longitude) }}
+                </div>
+                <div class="form-item">
+                    <label for="{{ lieuForm.ville.vars.id }}">Ville</label>
+                    {{ form_widget(lieuForm.ville) }}
+                </div>
+                <div class="form-btn">
+                    <button type="submit" class="btn">Ajouter !</button>
+                </div>
+            </div>
+            {{ form_end(lieuForm) }}
+        </div>
+{% endblock %}

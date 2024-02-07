@@ -104,6 +104,12 @@ a:visited {
    justify-content: center;
 }
 
+.form-link {
+   display: flex;
+   flex-direction: row;
+   justify-content: center;
+}
+
 .btn {
    background-color: #154981;
    color: #ececec;
@@ -142,6 +148,19 @@ a:visited {
    gap: 20px;
    display: flex;
    flex-direction: column;
+}
+
+.new-sortie-new-lieu {
+   display: flex;
+   flex-direction: row;
+   justify-content: space-evenly;
+   margin: auto;
+   gap: 50px;
+}
+
+.precision {
+   font-size: 0.8em;
+   color: #5e5e5e;
 }
 
 
