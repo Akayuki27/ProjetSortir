@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Data\SearchData;
+use App\Entity\Lieu;
 use App\Entity\Sortie;
 use App\Form\ModifSortieType;
 use App\Form\SearchForm;
@@ -28,6 +29,27 @@ class SortieController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $sortie->setOrganisateur($this->getUser());
             $sortie->addParticipant($sortie->getOrganisateur());
+
+            //********** debut du merdier **********//
+            $lieu = null;
+            $formData = $form->getData();
+
+            // Vérifie si l'option "Nouveau lieu" a été sélectionnée et si un nouveau lieu a été saisi
+            if ($formData['lieu'] === 'new' && !empty($formData['newLieu'])) {
+                $lieu = new Lieu();
+                $lieu->setNom($formData['newLieu']);
+                $entityManager->persist($lieu);
+            } elseif ($formData['Lieu']) {
+                // Si un lieu existant a été sélectionné, récupérez-le
+                $lieu = $formData['Lieu'];
+            }
+
+            if ($lieu) {
+                // Associez le lieu à la sortie
+                $sortie->setLieu($lieu);
+            }
+            //********** fin du merdier **********//
+
             //sauvegarde en base de données
             $entityManager->persist($sortie);
             $entityManager->flush();
