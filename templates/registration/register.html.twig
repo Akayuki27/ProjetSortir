@@ -7,23 +7,46 @@
     </div>
 {% endblock %}
 {% block body %}
-    <h1>Register</h1>
-
-    {{ form_errors(registrationForm) }}
-
-    {{ form_start(registrationForm) }}
-        {{ form_row(registrationForm.pseudo) }}
-        {{ form_row(registrationForm.plainPassword, {
-            label: 'Password'
-        }) }}
-    {{ form_row(registrationForm.lastname) }}
-    {{ form_row(registrationForm.firstname) }}
-    {{ form_row(registrationForm.phoneNumber) }}
-    {{ form_row(registrationForm.email) }}
-    {{ form_row(registrationForm.estRattacheA) }}
-    {{ form_row(registrationForm.ImgName) }}
-
-
-        <button type="submit" class="btn">Register</button>
-    {{ form_end(registrationForm) }}
+    <div class="form-super-container">
+        {{ form_errors(registrationForm) }}
+        {{ form_start(registrationForm) }}
+        <div class="form-container">
+            <div class="form-item">
+                <label for="{{ registrationForm.pseudo.vars.id }}">Pseudo</label>
+                {{ form_widget(registrationForm.pseudo) }}
+            </div>
+            <div class="form-item">
+                <label for="{{ registrationForm.plainPassword.vars.id }}">Mot de Passe</label>
+                {{ form_widget(registrationForm.plainPassword) }}
+            </div>
+            <div class="form-item">
+                <label for="{{ registrationForm.lastname.vars.id }}">Nom</label>
+                {{ form_widget(registrationForm.lastname) }}
+            </div>
+            <div class="form-item">
+                <label for="{{ registrationForm.firstname.vars.id }}">Prénom</label>
+                {{ form_widget(registrationForm.firstname) }}
+            </div>
+            <div class="form-item">
+                <label for="{{ registrationForm.phoneNumber.vars.id }}">Téléphone</label>
+                {{ form_widget(registrationForm.phoneNumber) }}
+            </div>
+            <div class="form-item">
+                <label for="{{ registrationForm.email.vars.id }}">Email</label>
+                {{ form_widget(registrationForm.email) }}
+            </div>
+            <div class="form-item">
+                <label for="{{ registrationForm.estRattacheA.vars.id }}">Campus</label>
+                {{ form_widget(registrationForm.estRattacheA) }}
+            </div>
+            <div class="form-item">
+                <label for="{{ registrationForm.ImgName.vars.id }}">Photo</label>
+                {{ form_widget(registrationForm.ImgName) }}
+            </div>
+            <div class="form-btn">
+                <button type="submit" class="btn">Inscrire</button>
+            </div>
+        </div>
+        {{ form_end(registrationForm) }}
+    </div>
 {% endblock %}
