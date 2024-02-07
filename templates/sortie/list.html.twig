@@ -21,9 +21,11 @@
     {% for sortie in sorties %}
     <div class="container">
         <a href="{{ path('sortie_details', {'id':sortie.id}) }}" title="details">{{ sortie.nom }} à {{ sortie.lieu.nom }}</a>
+        {% if is_granted("ROLE_ADMIN") or app.user == sortie.organisateur %}
         <a href="{{ path('sortie_modifier', {'id':sortie.id}) }}" title="modifier">Modifier</a>
         <a href="{{ path('sortie_annuler', {'id':sortie.id}) }}" title="annuler">Annuler la sortie</a>
         <a href="{{ path('sortie_delete', {'id':sortie.id}) }}" title="delete">Supprimer la sortie</a>
+        {% endif %}
     </div>
     {% endfor %}
 </div>
