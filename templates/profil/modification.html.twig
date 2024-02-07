@@ -7,10 +7,42 @@
     </div>
 {% endblock %}
 {% block body %}
-    <h1>Modifier le profil</h1>
-
-    {{ form_start(modificationProfil) }}
-    {{ form_widget(modificationProfil) }}
-    <button type="submit" class="btn btn-primary">Enregistrer</button>
-    {{ form_end(modificationProfil) }}
+    <div class="form-super-container">
+        {{ form_errors(modificationProfil) }}
+        {{ form_start(modificationProfil) }}
+        <div class="form-container">
+            <div class="form-item">
+                <label for="{{ modificationProfil.pseudo.vars.id }}">Pseudo</label>
+                {{ form_widget(modificationProfil.pseudo) }}
+            </div>
+            <div class="form-item">
+                <label for="{{ modificationProfil.lastname.vars.id }}">Nom</label>
+                {{ form_widget(modificationProfil.lastname) }}
+            </div>
+            <div class="form-item">
+                <label for="{{ modificationProfil.firstname.vars.id }}">Prénom</label>
+                {{ form_widget(modificationProfil.firstname) }}
+            </div>
+            <div class="form-item">
+                <label for="{{ modificationProfil.phoneNumber.vars.id }}">Téléphone</label>
+                {{ form_widget(modificationProfil.phoneNumber) }}
+            </div>
+            <div class="form-item">
+                <label for="{{ modificationProfil.email.vars.id }}">Email</label>
+                {{ form_widget(modificationProfil.email) }}
+            </div>
+            <div class="form-item">
+                <label for="{{ modificationProfil.estRattacheA.vars.id }}">Campus</label>
+                {{ form_widget(modificationProfil.estRattacheA) }}
+            </div>
+            <div class="form-item">
+                <label for="{{ modificationProfil.imgName.vars.id }}">Photo</label>
+                {{ form_widget(modificationProfil.imgName) }}
+            </div>
+            <div class="form-btn">
+                <button type="submit" class="btn">Inscrire</button>
+            </div>
+        </div>
+        {{ form_end(modificationProfil) }}
+    </div>
 {% endblock %}

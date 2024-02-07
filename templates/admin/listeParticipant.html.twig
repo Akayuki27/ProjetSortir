@@ -5,6 +5,7 @@
 {% block body %}
     {% for participant in participants %}
         <li>{{ participant.lastname | upper }} {{ participant.firstname }}</li>
+        <a href="{{ path('app_profil_modification' , {'id' : participant.id} )}}">Modifier le participant</a>
         <a href="{{ path('app_admin_participant_supprimer', {'id': participant.id}) }}">Supprimer le participant</a>
     {% endfor %}
 {% endblock %}
