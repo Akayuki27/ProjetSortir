@@ -13,13 +13,16 @@ main {
    display: flex;
    flex-direction: column;
    width: 94%;
-   min-height: 700px;
    margin: auto;
    padding-top: 30px;
    padding-bottom: 30px;
 }
 
 footer {
+   position: fixed;
+   bottom: 0;
+   left: 0;
+   width: 100%;
    background-color: #282828;
    height: 60px;
    color: #5e5e5e;
@@ -95,6 +98,12 @@ a:visited {
    width: 100%;
 }
 
+.form-btn {
+   display: flex;
+   flex-direction: row;
+   justify-content: center;
+}
+
 .btn {
    background-color: #154981;
    color: #ececec;
@@ -104,10 +113,35 @@ a:visited {
    font-size: 1.2em;
 }
 
-.form-btn {
+
+
+.profil-super-container {
    display: flex;
    flex-direction: row;
    justify-content: center;
+   margin: auto;
+   background-color: #282828;
+   border-radius: 5px;
+}
+
+.profil-photo-container {
+   width: 40%;
+   overflow: hidden;
+   padding: 30px;
+   margin: auto;
+}
+
+.profil-photo-container img {
+   width: 100%;
+   object-fit: cover;
+}
+
+.profil-container {
+   width: 60%;
+   padding: 30px;
+   gap: 20px;
+   display: flex;
+   flex-direction: column;
 }
 
 

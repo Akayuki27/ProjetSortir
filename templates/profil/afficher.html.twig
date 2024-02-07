@@ -7,14 +7,19 @@
     </div>
 {% endblock %}
 {% block body %}
-    <h1>Profil de {{ participant.pseudo }}</h1>
-    {% if participant.ImgName %}
-        <img src="{{ asset('photos/' ~ participant.ImgName) }}" alt="Photo de profil">
-    {% endif %}
-    <p>Nom : {{ participant.lastname }}</p>
-    <p>Prénom : {{ participant.firstname }}</p>
-    <p>Email : {{ participant.email }}</p>
-    {% if app.user == participant %}
-    <a href="{{ path('app_profil_modification') }}">Modifier mon profil</a>
+    <div class="profil-super-container">
+        <div class="profil-photo-container">
+            {% if participant.ImgName %}
+                <img src="{{ asset('photos/' ~ participant.ImgName) }}" alt="Photo de profil">
+            {% endif %}
+        </div>
+        <div class="profil-container">
+        <p>Nom : {{ participant.lastname }}</p>
+        <p>Prénom : {{ participant.firstname }}</p>
+        <p>Email : {{ participant.email }}</p>
+        {% if app.user == participant %}
+        <a href="{{ path('app_profil_modification') }}">Modifier mon profil</a>
+        </div>
+    </div>
 {% endif %}
 {% endblock %}
