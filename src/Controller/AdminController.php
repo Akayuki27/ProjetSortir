@@ -4,7 +4,6 @@ namespace App\Controller;
 
 
 use App\Form\ModifVilleType;
-use App\Form\VillesFiltreType;
 use App\Repository\VilleRepository;
 
 use App\Entity\Campus;
@@ -30,9 +29,7 @@ class AdminController extends AbstractController
         $ville = new Ville();
         $ajoutVille = $this->createForm(AjoutVilleType::class,$ville);
         $ajoutVille ->handleRequest($request);
-
-        $filtre = $this->createForm(VillesFiltreType::class);
-        $filtre ->handleRequest($request);
+        
         $action = $request->query->get('action');
         $villes = $villeRepository->findAll();
 
