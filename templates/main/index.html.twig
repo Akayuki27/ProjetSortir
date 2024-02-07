@@ -2,7 +2,9 @@
 
 {% block title %}{{ parent() }}{% endblock %}
 {% block titrepage %}
-
+    <div class="title-container">
+        <h1>{{ parent() }}</h1>
+    </div>
 {% endblock %}
 {% block body %}
     Arretez de jouez à l'ordinateur et allez dehors !

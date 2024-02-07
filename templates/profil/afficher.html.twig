@@ -1,7 +1,11 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}Profil de {{ participant.pseudo }}{% endblock %}
-
+{% block titrepage %}
+    <div class="title-container">
+        <h1>Profil de {{ participant.pseudo }}</h1>
+    </div>
+{% endblock %}
 {% block body %}
     <h1>Profil de {{ participant.pseudo }}</h1>
     {% if participant.ImgName %}

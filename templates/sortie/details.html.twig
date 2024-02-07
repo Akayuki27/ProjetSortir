@@ -1,7 +1,11 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}{{ sortie.nom }}{% endblock %}
-
+{% block titrepage %}
+    <div class="title-container">
+        <h1>{{ sortie.nom }}</h1>
+    </div>
+{% endblock %}
 {% block body %}
     <h1>{{ sortie.nom }}</h1>
     <div>
