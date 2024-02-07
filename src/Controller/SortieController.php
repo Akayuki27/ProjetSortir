@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Data\SearchData;
 use App\Entity\Lieu;
 use App\Entity\Sortie;
+use App\Entity\Ville;
 use App\Form\ModifSortieType;
 use App\Form\SearchForm;
 use App\Form\SortieType;
@@ -24,32 +25,15 @@ class SortieController extends AbstractController
     #[Route('/create', name: 'create')]
     public function create(Request $request, EntityManagerInterface $entityManager): Response
     {
+        $action = $request->query->get('action');
+
         $sortie = new Sortie();
         $form = $this->createForm(SortieType::class, $sortie);
         $form->handleRequest($request);
+
         if ($form->isSubmitted() && $form->isValid()) {
             $sortie->setOrganisateur($this->getUser());
             $sortie->addParticipant($sortie->getOrganisateur());
-
-            //********** debut du merdier **********//
-            $lieu = null;
-            $formData = $form->getData();
-
-            // Vérifie si l'option "Nouveau lieu" a été sélectionnée et si un nouveau lieu a été saisi
-            if ($formData['lieu'] === 'new' && !empty($formData['newLieu'])) {
-                $lieu = new Lieu();
-                $lieu->setNom($formData['newLieu']);
-                $entityManager->persist($lieu);
-            } elseif ($formData['Lieu']) {
-                // Si un lieu existant a été sélectionné, récupérez-le
-                $lieu = $formData['Lieu'];
-            }
-
-            if ($lieu) {
-                // Associez le lieu à la sortie
-                $sortie->setLieu($lieu);
-            }
-            //********** fin du merdier **********//
 
             //sauvegarde en base de données
             $entityManager->persist($sortie);
@@ -59,8 +43,36 @@ class SortieController extends AbstractController
             return $this->redirectToRoute('sortie_list');
         }
 
+        //form en plus pour création d'un nouveau lieu
+        if ($action){
+            $data = $request->query->get('newLieu');
+            dump($action);
+
+            //creation du lieu
+            $lieu = new Lieu();
+            $lieu->setNom($data);
+            $lieu->setRue($data['rue']);
+            $lieu->setLatitude($data['latitude']);
+            $lieu->setLongitude($data['longitude']);
+
+            //lier le lieu a une ville de la bdd
+            $villeId = $data['ville'];
+            $ville = $entityManager->getRepository(Ville::class)->find($villeId);
+            $lieu->setVille($ville);
+
+            $entityManager->persist($lieu);
+            $entityManager->flush();
+
+            // Ajout du nouveau lieu au formulaire pour la sélection
+            $form->get('Lieu')->setData($lieu);
+        }
+
+        //pour choper les villes dans la bdd et renvoyer a la vue
+        $villes = $entityManager->getRepository(Ville::class)->findAll();
+
         return $this->render('sortie/create.html.twig', [
-            'form' => $form
+            'form' => $form,
+            'villes' => $villes
         ]);
     }
 
