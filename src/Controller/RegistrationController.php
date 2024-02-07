@@ -89,7 +89,9 @@ class RegistrationController extends AbstractController
                             $participantCourant->setFirstname($data[2]);
                             $participantCourant->setLastname($data[3]);
                             $participantCourant->setPhoneNumber($data[4]);
-                            $participantCourant->setPassword($data[5]);
+                            $participantCourant->setPassword(
+                                $userPasswordHasher->hashPassword($participantCourant,$data[5])
+                            );
 
                             $entityManager->persist($participantCourant);
                             $entityManager->flush();
