@@ -1,0 +1,10 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{% endblock %}
+{% block titrepage %}Liste des participants{% endblock %}
+{% block body %}
+    {% for participant in participants %}
+        <li>{{ participant.lastname | upper }} {{ participant.firstname }}</li>
+        <a href="{{ path('app_admin_participant_supprimer', {'id': participant.id}) }}">Supprimer le participant</a>
+    {% endfor %}
+{% endblock %}

@@ -34,7 +34,9 @@ nav {
    gap: 20px;
    padding-right: 20px;
 }
-
+a {
+   color: deeppink;
+}
 a:active, a:hover {
    color: #ececec;
 }
@@ -68,6 +70,9 @@ footer p {
    font-weight: 400;
 }
 
+a:visited {
+   color: pink;
+}
 .form-super-container {
    display: flex;
    justify-content: center;

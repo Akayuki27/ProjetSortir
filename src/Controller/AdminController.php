@@ -3,7 +3,9 @@
 namespace App\Controller;
 
 
+use App\Entity\Participant;
 use App\Form\ModifVilleType;
+use App\Repository\ParticipantRepository;
 use App\Repository\VilleRepository;
 
 use App\Entity\Campus;
@@ -156,5 +158,18 @@ class AdminController extends AbstractController
         return $this->render('admin/modifVille.html.twig', [
         'form' => $form, 'ville' => $ville]);
     }
+    #[Route('/listeParticipant', name: '_participant_liste')]
+    public function listeParticipant(Request $request,ParticipantRepository $pr, EntityManagerInterface $entityManager): Response
+    {
+        $participants = $pr->findAll();
+        return $this->render('admin/listeParticipant.html.twig', ['participants' => $participants]);
+    }
 
+    #[Route('/participant/{id}/supprimer', name: '_participant_supprimer')]
+    public function supprimerParticipant(Request $request,Participant $participant, EntityManagerInterface $entityManager): Response
+    {
+        $entityManager->remove($participant);
+        $entityManager->flush();
+        return $this->redirectToRoute('app_admin_participant_liste');
+    }
 }
