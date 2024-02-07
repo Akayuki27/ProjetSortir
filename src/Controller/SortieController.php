@@ -2,8 +2,10 @@
 
 namespace App\Controller;
 
+use App\Data\SearchData;
 use App\Entity\Sortie;
 use App\Form\ModifSortieType;
+use App\Form\SearchForm;
 use App\Form\SortieType;
 use App\Repository\EtatRepository;
 use App\Repository\SortieRepository;
@@ -40,11 +42,15 @@ class SortieController extends AbstractController
     }
 
     #[Route('/list', name: 'list')]
-    public function list(SortieRepository $repository): Response
+    public function list(SortieRepository $repository, Request $request): Response
     {
-        $sorties = $repository->findAll();
+        $data = new SearchData();
+        $form = $this->createForm(SearchForm::class, $data);
+        $form->handleRequest($request);
+        $sorties = $repository->findSearch($data);
         return $this->render('sortie/list.html.twig', [
-        'sorties' => $sorties
+        'sorties' => $sorties,
+            'form' => $form
         ]);
     }
 
