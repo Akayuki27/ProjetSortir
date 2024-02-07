@@ -25,14 +25,16 @@
            <li>{{ participant.lastname | upper }} {{ participant.firstname }}</li>
         {% endfor %}
         </ul>
+        <div>
         <p>Nombre de participants: {{ sortie.participants | length }}</p>
         {% set userIsParticipant = false %}
         {% for participant in sortie.participants %}
             {% if app.user == participant %}
                 {% set userIsParticipant = true %}
             {% endif %}
+            <a href="{{ path('app_profil', {'id' :participant.id}) }}">{{ participant.firstname }} {{ participant.lastname }}</a>
         {% endfor %}
-
+        </div>
         {% if userIsParticipant %}
             <a href="{{ path('sortie_desister', {'id' : sortie.id}) }}">Se désister</a>
         {% else %}
