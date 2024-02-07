@@ -65,6 +65,7 @@ class SortieController extends AbstractController
         // Récupérer la sortie à laquelle l'utilisateur souhaite s'inscrire
         $sortie = $repository->find($id);
         $user = $this->getUser();
+        $aujourdhui = new \DateTime();
 
         if (!$sortie) {
             throw $this->createNotFoundException('La sortie demandée n\'existe pas');
@@ -79,6 +80,12 @@ class SortieController extends AbstractController
             $this->addFlash('danger', 'Désolé le nombre maximum de participants a été atteint !');
             return $this->redirectToRoute('sortie_details', ['id'=>$sortie->getId()]);
         }
+
+        if ($sortie->getDateLimiteInscription() <= $aujourdhui ) {
+            $this->addFlash('danger', 'Désolé mais la date d\'inscription à été dépassée');
+            return $this->redirectToRoute('sortie_list');
+        }
+
 
         // Ajouter l'utilisateur à la liste des participants de la sortie
         $sortie->addParticipant($user);
