@@ -7,9 +7,57 @@
     </div>
 {% endblock %}
 {% block body %}
+    <div class="form-super-container">
+        {{ form_errors(form) }}
+        {{ form_start(form) }}
+        <div class="form-container">
+            <div class="form-item">
+                <label for="{{ form.nom.vars.id }}">Nom</label>
+                {{ form_widget(form.nom) }}
+            </div>
+            <div class="form-item">
+                <label for="{{ form.dateHeureDebut.vars.id }}">Date début</label>
+                {{ form_widget(form.dateHeureDebut) }}
+            </div>
+            <div class="form-item">
+                <label for="{{ form.duree.vars.id }}">Durée</label>
+                {{ form_widget(form.duree) }}
+            </div>
+            <div class="form-item">
+                <label for="{{ form.dateLimiteInscription.vars.id }}">Fin des inscriptions</label>
+                {{ form_widget(form.dateLimiteInscription) }}
+            </div>
+            <div class="form-item">
+                <label for="{{ form.nbInscriptionMax.vars.id }}">Nbr de participants max</label>
+                {{ form_widget(form.nbInscriptionMax) }}
+            </div>
+            <div class="form-item">
+                <label for="{{ form.infosSortie.vars.id }}">Description</label>
+                {{ form_widget(form.infosSortie) }}
+            </div>
+            <div class="form-item">
+                <label for="{{ form.campus.vars.id }}">Campus</label>
+                {{ form_widget(form.campus) }}
+            </div>
+            <div class="form-item">
+                <label for="{{ form.etat.vars.id }}">Etat</label>
+                {{ form_widget(form.etat) }}
+            </div>
+            <div class="form-item">
+                <label for="{{ form.Lieu.vars.id }}">Lieu</label>
+                {{ form_widget(form.Lieu) }}
+            </div>
+            <div class="form-btn">
+                <button type="submit" class="btn">Ajouter !</button>
+            </div>
+        </div>
+        {{ form_end(form) }}
+    </div>
 
+
+    {#
     {{ form_start(form) }}
     {{ form_widget(form) }}
     <button>Add!</button>
-    {{ form_end(form) }}
+    {{ form_end(form) }} #}
 {% endblock %}

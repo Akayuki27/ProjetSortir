@@ -76,10 +76,10 @@ footer p {
 a:visited {
    color: pink;
 }
+
 .form-super-container {
    display: flex;
    justify-content: center;
-
 }
 
 .form-container {
