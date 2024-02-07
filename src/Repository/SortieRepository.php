@@ -2,11 +2,15 @@
 
 namespace App\Repository;
 
+use App\Controller\SortieController;
 use App\Data\SearchData;
+use App\Entity\Participant;
 use App\Entity\Sortie;
+use Couchbase\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
+use Symfony\Component\Security\Csrf\TokenStorage\TokenStorageInterface;
 
 /**
  * @extends ServiceEntityRepository<Sortie>
@@ -27,11 +31,13 @@ class SortieRepository extends ServiceEntityRepository
      * Récupérer les produits en lien avec une recherche
      * @return Sortie[]
      */
-    public function findSearch(SearchData $search): array {
+    public function findSearch(SearchData $search, int $id): array {
+
         $query = $this
             ->createQueryBuilder('s')
-        ->select('c', 's')
-        ->join('s.campus', 'c');
+        ->select('c', 'p', 's')
+        ->join('s.campus', 'c')
+        ->join('s.participants', 'p');
 
         if (!empty($search->q)) {
             $query = $query
@@ -54,19 +60,19 @@ class SortieRepository extends ServiceEntityRepository
         if (!empty($search->organisateur)) {
             $query= $query
                 ->andWhere('s.organisateur = :organisateur')
-                ->setParameter('organisateur', $this->security->getUser());
+                ->setParameter('organisateur', $id);
         }
 
         if (!empty($search->inscrit)) {
             $query= $query
-                ->andWhere('s.participants = :inscrit')
-                ->setParameter('inscrit', $this->security->getUser());
+                ->andWhere('p.id = :inscrit')
+                ->setParameter('inscrit', $id);
         }
 
         if (!empty($search->nonInscrit)) {
             $query= $query
-                ->andWhere('s.participants != :nonInscrit')
-                ->setParameter('nonInscrit', $this->security->getUser());
+                ->andWhere('p.id != :nonInscrit')
+                ->setParameter('nonInscrit', $id);
         }
 
         if (!empty($search->passe)) {
@@ -77,8 +83,8 @@ class SortieRepository extends ServiceEntityRepository
 
         if (!empty($search->campus)) {
             $query= $query
-                ->andWhere('c.id IN (:campus)')
-                ->setParameter('campus', $search->campus);
+                ->andWhere('c.id = :campus')
+                ->setParameter('campus', $search->campus->getId());
         }
 
 

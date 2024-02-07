@@ -9,6 +9,7 @@ use App\Form\ModifSortieType;
 use App\Form\SearchForm;
 use App\Form\SortieType;
 use App\Repository\EtatRepository;
+use App\Repository\ParticipantRepository;
 use App\Repository\SortieRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use phpDocumentor\Reflection\Types\This;
@@ -64,12 +65,15 @@ class SortieController extends AbstractController
     }
 
     #[Route('/list', name: 'list')]
-    public function list(SortieRepository $repository, Request $request): Response
+    public function list(SortieRepository $repository, Request $request,
+    ParticipantRepository $repo): Response
     {
+        $user = $this->getUser();
+        $id = $repo->findOneBy(['pseudo' => $user->getUserIdentifier()])->getId();
         $data = new SearchData();
         $form = $this->createForm(SearchForm::class, $data);
         $form->handleRequest($request);
-        $sorties = $repository->findSearch($data);
+        $sorties = $repository->findSearch($data, $id);
         return $this->render('sortie/list.html.twig', [
         'sorties' => $sorties,
             'form' => $form
