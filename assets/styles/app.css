@@ -39,7 +39,7 @@ nav {
 }
 
 a {
-   color: deeppink;
+   color: #004982;
 }
 
 a:active, a:hover {
@@ -61,6 +61,15 @@ footer p {
    padding: 10px;
    border-radius: 5px;
    font-size: 1.2em;
+}
+
+.btn-little {
+   background-color: #004982;
+   color: #ececec;
+   border: none;
+   padding: 5px;
+   border-radius: 5px;
+   font-size: 0.8em;
 }
 
 .btn:hover {
@@ -87,6 +96,8 @@ footer p {
    font-size: 0.8em;
    font-weight: 400;
 }
+
+/***************** FORM ***********************/
 
 .form-super-container {
    display: flex;
@@ -163,6 +174,8 @@ footer p {
    color: #5e5e5e;
 }
 
+/***************** MEGA FILTRE ***********************/
+
 .sortie-container {
    display: flex;
    flex-direction: column;
@@ -226,6 +239,8 @@ footer p {
    justify-content: center;
 }
 
+/***************** BOUCLE FOR ***********************/
+
 .participant-container {
    display: flex;
    flex-direction: row;
@@ -251,17 +266,38 @@ footer p {
    gap: 20px;
 }
 
-.flash-success {
-   background-color: #4CAF50;
-   color: white;
+/***************** FLASH ***********************/
+
+.flash-container {
+   display: flex;
+   justify-content: center;
+   margin: auto;
+}
+
+.flash-success, .flash-error, .flash-warning{
+   background-color: #13395d;
+   color: #ececec;
+   text-align : center;
+   margin-bottom: 20px;
+   padding:10px;
+   border-radius: 5px;
+   max-width: 500px;
 }
 
 .flash-error {
    background-color: #f44336;
-   color: white;
 }
 
 .flash-warning {
    background-color: #ff9800;
-   color: white;
+}
+
+/***************** MEDIA QUERIES ***********************/
+
+@media screen and (max-width: 600px) {
+
+   body {
+      background-color: #ff9800;
+   }
+
 }

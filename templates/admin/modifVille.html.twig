@@ -1,5 +1,5 @@
 {% extends 'base.html.twig' %}
-{% block title %}Villes{% endblock %}
+{% block title %}{{ ville.nom }}{% endblock %}
 {% block titrepage %}
     <div class="title-container">
         <h1>Modification des Villes</h1>
@@ -16,7 +16,4 @@
 
 {% endblock %}
 
-{% block title %}
-{{ ville.nom }}
-{% endblock %}
 

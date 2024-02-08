@@ -12,14 +12,14 @@
     <form action="{{ path('app_admin_campus', {'action': 'ajouter'}) }}" method="post">
         <label for="nom">Nouveau campus :</label>
         <input type="text" id="nom" name="nom" placeholder="Ajouter un campus" required>
-        <button type="submit">Ajouter</button>
+        <button type="submit" class="btn-little">Ajouter</button>
     </form>
 
     {# formulaire de filtre #}
     <form action="{{ path('app_admin_campus') }}" method="get">
         <input type="hidden" name="action" value="filtrer">
         <input type="text" name="filtrer" placeholder="">
-        <button type="submit">Rechercher</button>
+        <button type="submit" class="btn-little">Rechercher</button>
     </form>
 
      {% if campuses is not empty %}
@@ -31,7 +31,7 @@
                         {# Formulaire de modification de nom de campus #}
                         <form action="{{ path('app_admin_campus', {'action': 'modifier', 'id': campus.id}) }}" method="post">
                             <input type="text" name="nouveau_nom" placeholder="{{ campus.nom }}">
-                            <button type="submit">Modifier</button>
+                            <button type="submit" class="btn-little">Modifier</button>
                         </form>
                         {# Lien de suppression #}
                         <a href="{{ path('app_admin_campus_supprimer', {'id': campus.id}) }}"
