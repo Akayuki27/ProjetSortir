@@ -97,6 +97,10 @@ footer p {
    font-weight: 400;
 }
 
+.high-right {
+
+}
+
 /***************** FORM ***********************/
 
 .form-super-container {
@@ -180,16 +184,13 @@ footer p {
 
 /***************** MEGA FILTRE ***********************/
 
-.sortie-container {
-   display: flex;
-   flex-direction: column;
-}
 
 .sortie-form-super-container {
    display: flex;
    flex-direction: column;
    background-color: #282828;
    border-radius: 5px;
+   margin-bottom: 10px;
 }
 
 .sortie-form-container {
@@ -306,6 +307,10 @@ footer p {
 
 .flash-warning {
    background-color: #ff9800;
+}
+
+#titre-sortie {
+   text-decoration: none;
 }
 
 /***************** MEDIA QUERIES ***********************/

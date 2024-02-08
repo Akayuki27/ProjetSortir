@@ -11,74 +11,74 @@
     </div>
 {% endblock %}
 {% block body %}
-    <div class="sortie-container">
     <div class="sortie-form-super-container">
         {# formulaire de recherche #}
         {{ form_errors(form) }}
         {{ form_start(form) }}
-    <div class="sortie-form-container">
-        <div class="filtre-bloc1">
-            <div class="filtre-bloc1A">
-                <div class="bloc1A-item">
-                    {{ form_label(form.campus) }}
-                    {{ form_widget(form.campus) }}
+        <div class="sortie-form-container">
+            <div class="filtre-bloc1">
+                <div class="filtre-bloc1A">
+                    <div class="bloc1A-item">
+                        {{ form_label(form.campus) }}
+                        {{ form_widget(form.campus) }}
+                    </div>
+                    <div class="bloc1A-item">
+                        {{ form_label(form.q) }}
+                        {{ form_widget(form.q) }}
+                    </div>
                 </div>
-                <div class="bloc1A-item">
-                    {{ form_label(form.q) }}
-                    {{ form_widget(form.q) }}
+                <div class="filtre-bloc1B">
+                    <div class="bloc1B-item">
+                        {{ form_label(form.min) }}
+                        {{ form_widget(form.min) }}
+                    </div>
+                    <div class="bloc1B-item">
+                        {{ form_label(form.max) }}
+                        {{ form_widget(form.max) }}
+                    </div>
                 </div>
             </div>
-            <div class="filtre-bloc1B">
-                <div class="bloc1B-item">
-                    {{ form_label(form.min) }}
-                    {{ form_widget(form.min) }}
+            <div class="filtre-bloc2">
+                <div class="bloc2-item">
+                    {{ form_label(form.organisateur) }}
+                    {{ form_widget(form.organisateur) }}
                 </div>
-                <div class="bloc1B-item">
-                    {{ form_label(form.max) }}
-                    {{ form_widget(form.max) }}
+                <div class="bloc2-item">
+                    {{ form_label(form.inscrit) }}
+                    {{ form_widget(form.inscrit) }}
                 </div>
+                <div class="bloc2-item">
+                    {{ form_label(form.nonInscrit) }}
+                    {{ form_widget(form.nonInscrit) }}
+                </div>
+                <div class="bloc2-item">
+                    {{ form_label(form.passe) }}
+                    {{ form_widget(form.passe) }}
+                </div>
+            </div>
+            <div class="filtre-bloc3">
+                <button type="submit" class="btn">Rechercher</button>
             </div>
         </div>
-        <div class="filtre-bloc2">
-            <div class="bloc2-item">
-                {{ form_label(form.organisateur) }}
-                {{ form_widget(form.organisateur) }}
-            </div>
-            <div class="bloc2-item">
-                {{ form_label(form.inscrit) }}
-                {{ form_widget(form.inscrit) }}
-            </div>
-            <div class="bloc2-item">
-                {{ form_label(form.nonInscrit) }}
-                {{ form_widget(form.nonInscrit) }}
-            </div>
-            <div class="bloc2-item">
-                {{ form_label(form.passe) }}
-                {{ form_widget(form.passe) }}
-            </div>
-        </div>
-        <div class="filtre-bloc3">
-        <button type="submit" class="btn">Rechercher</button>
-        </div>
-    </div>
         {{ form_end(form) }}
     </div>
 
-    <div class="list-super-container">
+    <div class="participant-container">
         {% for sortie in sorties %}
-        <div class="list-container">
-            <a href="{{ path('sortie_details', {'id':sortie.id}) }}" title="details">{{ sortie.nom }}</a>
+        <div class="participant-item">
+            <h2><a id="titre-sortie" href="{{ path('sortie_details', {'id':sortie.id}) }}" title="details">{{ sortie.nom }}</a></h2>
             <p>Lieu: {{ sortie.lieu.nom }}</p>
             <p>Date de la sortie: {{ sortie.dateHeureDebut | date }}</p>
             <p>Nombre d'inscrits: {{ sortie.participants | length }}/{{ sortie.nbInscriptionMax }}</p>
             <p>Clôture des inscriptions: {{ sortie.dateLimiteInscription | date }}</p>
             {% if is_granted("ROLE_ADMIN") or app.user == sortie.organisateur %}
             <a href="{{ path('sortie_modifier', {'id':sortie.id}) }}" title="modifier">Modifier</a>
-            <a href="{{ path('sortie_annuler', {'id':sortie.id}) }}" title="annuler">Annuler la sortie</a>
-            <a href="{{ path('sortie_delete', {'id':sortie.id}) }}" title="delete">Supprimer la sortie</a>
+            <a href="{{ path('sortie_annuler', {'id':sortie.id}) }}" title="annuler">Annuler</a>
+            <a href="{{ path('sortie_delete', {'id':sortie.id}) }}" title="delete">Supprimer</a>
+            <a href="{{ path('sortie_details', {'id':sortie.id}) }}" title="delete">Détail</a>
             {% endif %}
         </div>
         {% endfor %}
     </div>
-    </div>
+
 {% endblock %}
