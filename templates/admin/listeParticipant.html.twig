@@ -3,10 +3,14 @@
 {% block title %}{% endblock %}
 {% block titrepage %}Liste des participants{% endblock %}
 {% block body %}
+    <div class="">
     {% for participant in participants %}
-        <p>{{ participant.pseudo }}</p>
-        <p>{{ participant.lastname | upper }} {{ participant.firstname }}</p>
-        <a href="{{ path('app_profil_modification' , {'id' : participant.id} )}}">Modifier le participant</a>
-        <a href="{{ path('app_admin_participant_supprimer', {'id': participant.id}) }}">Supprimer le participant</a>
+        <div class="">
+            <div class=""><p>{{ participant.pseudo }}</p></div>
+            <div class=""><p>{{ participant.lastname | upper }} {{ participant.firstname }}</p></div>
+            <div class=""><a href="{{ path('app_profil_modification' , {'id' : participant.id} )}}">Modifier le participant</a></div>
+            <div class=""><a href="{{ path('app_admin_participant_supprimer', {'id': participant.id}) }}">Supprimer le participant</a><div>
+        </div>
     {% endfor %}
+            </div>
 {% endblock %}

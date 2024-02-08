@@ -123,11 +123,9 @@ class AdminController extends AbstractController
                 break;
             default:
                 $campuses = $campusRepository->findAll();
-                dump($campuses);
         }
 
         if(!empty($campuses)){
-            dump($campuses);
             return $this->render('admin/campus.html.twig', ['campuses' => $campuses]);
         }else{
             return $this->redirectToRoute('app_admin_campus');
