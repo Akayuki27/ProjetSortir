@@ -7,6 +7,7 @@
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500&display=swap" rel="stylesheet">
+        <link rel="icon" type="image/x-icon" href="/public/img/bvZIVYNp_400x400.jpg">
         {% block stylesheets %}
         {% endblock %}
 
@@ -22,6 +23,7 @@
             </div>
             <nav>
                 {% if app.user %}
+                    <a href="{{ path('app_groupe_list') }}">Mes groupes</a>
                     <a href="{{ path("sortie_create") }}" title="Ajouter une sortie">Ajouter une sortie</a>
                     <a href="{{ path("sortie_list") }}" title="Sorties">Toutes les sorties</a>
                     {% if is_granted("ROLE_ADMIN") %}
@@ -29,6 +31,7 @@
                     <a href="{{ path("app_admin_campus") }}" title="campus">Campus</a>
                     <a href="{{ path("app_register") }}" title="register">Nouvel utilisateur</a>
                     <a href="{{ path('app_admin_participant_liste') }}">Liste des participants</a>
+
                         {% endif %}
                     <a href="{{ path('app_profil', {'id': app.user.id}) }}">Mon Profil</a>
                     <a href="{{ path("app_logout") }}" title="logout">Logout</a>

@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des groupes{% endblock %}
+{% block titrepage %}
+    <div class="title-container">
+        <h1>Liste des groupes</h1>
+    </div>
+
+{% endblock %}
+{% block body %}
+
+        <div class="list-super-container">
+            {% for groupe in groupes %}
+                {% if groupe.participant.contains(app.user)   %}
+                <div class="list-container">
+                   <a href="{{ path('app_groupe_details', {'id' : groupe.id}) }}" title="{{ groupe.nom }}">{{ groupe.nom }}</a>                </div>
+                {% endif %}
+            {% endfor %}
+        </div>
+
+    </div>
+{% endblock %}

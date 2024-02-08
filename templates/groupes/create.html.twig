@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block titrepage %}
+
+{% endblock %}
+
+{% block body %}
+
+    {{ form_start(form) }}
+    {{ form_row(form.nom) }}
+    {{ form_row(form.participant) }}
+    <button type="submit" class="btn">Ajouter !</button>
+    {{ form_end(form) }}
+{% endblock %}
+
