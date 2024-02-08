@@ -37,7 +37,6 @@ class Sortie
     private ?string $infosSortie = null;
 
     #[ORM\ManyToMany(targetEntity: Participant::class, mappedBy: 'estInscrit')]
-    #[Assert\LessThanOrEqual(propertyPath: 'nbInscriptionMax')]
     private Collection $participants;
 
     #[ORM\ManyToOne(inversedBy: 'organisateur')]
