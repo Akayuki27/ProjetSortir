@@ -32,7 +32,7 @@
             {% if app.user == participant %}
                 {% set userIsParticipant = true %}
             {% endif %}
-            <a href="{{ path('app_profil', {'id' :participant.id}) }}">{{ participant.firstname }} {{ participant.lastname }}</a>
+            <a href="{{ path('app_profil', {'id' :participant.id}) }}">{{ participant.firstname }} {{ participant.lastname }}</a><br>
         {% endfor %}
         </div>
         {% if userIsParticipant %}

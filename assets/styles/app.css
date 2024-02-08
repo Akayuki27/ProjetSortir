@@ -163,4 +163,17 @@ a:visited {
    color: #5e5e5e;
 }
 
+.flash-success {
+   background-color: #4CAF50;
+   color: white;
+}
 
+.flash-error {
+   background-color: #f44336;
+   color: white;
+}
+
+.flash-warning {
+   background-color: #ff9800;
+   color: white;
+}

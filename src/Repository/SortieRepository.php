@@ -28,12 +28,10 @@ class SortieRepository extends ServiceEntityRepository
      * @return Sortie[]
      */
     public function findSearch(SearchData $search, int $id): array {
-
-        $query = $this
-            ->createQueryBuilder('s')
-        ->select('c', 'p', 's')
-        ->join('s.campus', 'c')
-        ->join('s.participants', 'p');
+        $query = $this->createQueryBuilder('s')
+            ->select('c', 'p', 's')
+            ->join('s.campus', 'c')
+            ->leftJoin('s.participants', 'p');
 
         if (!empty($search->q)) {
             $query = $query
@@ -42,50 +40,50 @@ class SortieRepository extends ServiceEntityRepository
         }
 
         if (!empty($search->min)) {
-            $query= $query
+            $query = $query
                 ->andWhere('s.dateHeureDebut >= :min')
                 ->setParameter('min', $search->min);
         }
 
         if (!empty($search->max)) {
-            $query= $query
+            $query = $query
                 ->andWhere('s.dateHeureDebut <= :max')
                 ->setParameter('max', $search->max);
         }
 
         if (!empty($search->organisateur)) {
-            $query= $query
+            $query = $query
                 ->andWhere('s.organisateur = :organisateur')
                 ->setParameter('organisateur', $id);
         }
 
-        if (!empty($search->inscrit)) {
-            $query= $query
-                ->andWhere('p.id = :inscrit')
-                ->setParameter('inscrit', $id);
+        if ($search->inscrit) {
+            $query = $query
+                ->andWhere(':id MEMBER OF s.participants')
+                ->setParameter('id', $id);
         }
 
-        if (!empty($search->nonInscrit)) {
-            $query= $query
-                ->andWhere('p.id != :nonInscrit')
-                ->setParameter('nonInscrit', $id);
+        if ($search->nonInscrit) {
+            $query = $query
+                ->andWhere(':id NOT MEMBER OF s.participants')
+                ->setParameter('id', $id);
         }
 
         if (!empty($search->passe)) {
-            $query= $query
+            $query = $query
                 ->andWhere('s.etat = :passe')
                 ->setParameter('passe', 5);
         }
 
         if (!empty($search->campus)) {
-            $query= $query
+            $query = $query
                 ->andWhere('c.id = :campus')
                 ->setParameter('campus', $search->campus->getId());
         }
 
-
         return $query->getQuery()->getResult();
     }
+
 
 //    /**
 //     * @return Sortie[] Returns an array of Sortie objects
