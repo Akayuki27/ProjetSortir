@@ -6,8 +6,9 @@
         <h1>Liste des sorties</h1>
     </div>
     <div class="high-right">
-        <p>Date du jour: {{ today | date('d-m-Y') }}</p>
-        <p>Participant: {{ app.user.pseudo }}</p>
+        <div class="high-right-item">
+            <p>Date du jour : {{ today | date('d-m-Y') }}</p>
+        </div>
     </div>
 {% endblock %}
 {% block body %}
