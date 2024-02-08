@@ -17,12 +17,15 @@ class CSVRegistrationType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('csv', FileType::class,[
+            ->add('csv', FileType::class, [
                 'label' => 'Fichier CSV',
-                'constraints' => [new NotBlank(message: "Fichier obligatoire"),
+                'constraints' => [
                     new File([
-                        'mimeTypes' => ['text/csv'],
-                        'mimeTypesMessage' => 'Veuillez télécharger un fichier CSV valide.',
+                        'mimeTypes' => [
+                            'text/csv',
+                            'text/plain',
+                        ],
+                        'mimeTypesMessage' => 'Veuillez télécharger un fichier valide - csv ou txt.',
                     ]),
                 ],
             ])
