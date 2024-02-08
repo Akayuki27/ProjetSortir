@@ -7,19 +7,20 @@
     </div>
 {% endblock %}
 {% block body %}
-    <div class="participant-super-container">
-        <div class="participant-container">
-
+    <div class="participant-container">
                 {% for participant in participants %}
-                    <div class=""><p>{{ participant.pseudo }}</p></div>
-                    <div class=""><p>{{ participant.lastname | upper }} {{ participant.firstname }}</p></div>
-
-
-                    <div class=""><a href="{{ path('app_profil_modification' , {'id' : participant.id} )}}">Modifier</a></div>
-                    <div class=""><a href="{{ path('app_admin_participant_supprimer', {'id': participant.id}) }}",
-                                     onclick="return confirm('Êtes-vous sûr de vouloir anéantir ce type ?')">Supprimer</a><div>
+                    <div class="participant-item">
+                    <div class="">
+                        <p>{{ participant.pseudo }}</p>
+                        <p>{{ participant.lastname | upper }} {{ participant.firstname }}</p>
+                    </div>
+                    <div class="participant-modif">
+                        <a href="{{ path('app_profil_modification' , {'id' : participant.id} )}}">Modifier</a>
+                        <a href="{{ path('app_admin_participant_supprimer', {'id': participant.id}) }}",
+                           onclick="return confirm('Êtes-vous sûr de vouloir anéantir ce type ?')">Supprimer</a>
+                    </div>
+                    </div>
                 {% endfor %}
 
-    </div>
     </div>
 {% endblock %}

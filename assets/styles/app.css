@@ -226,28 +226,29 @@ footer p {
    justify-content: center;
 }
 
-
-
-
-
-
-
-
-.participant-super-container {
-   display: flex;
-   flex-direction: row;
-   flex-flow: wrap;
-   justify-content: space-between;
-   margin: auto;
-   gap: 10px;
-   background-color: #f44336;
-}
-
 .participant-container {
    display: flex;
+   flex-direction: row;
+   flex-wrap: wrap;
+   justify-content: center;
+   gap: 4%;
+}
+
+.participant-item {
+   display: flex;
    flex-direction: column;
-   gap: 50px;
-   background-color: hotpink;
+   width: 300px;
+   gap: 10px;
+   margin-bottom: 10px;
+   background-color: #282828;
+   border-radius: 5px;
+   padding: 10px;
+}
+
+.participant-modif {
+   display: flex;
+   flex-direction: row;
+   gap: 20px;
 }
 
 .flash-success {
