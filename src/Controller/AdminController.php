@@ -114,7 +114,7 @@ class AdminController extends AbstractController
             case 'filtrer':
                 $nom = $request->query->get('filtrer');
                 if ($nom) {
-                    $campuses = $campusRepository->findBy(["nom"=>$nom]);
+                    $campuses = $campusRepository->findByNom($nom);
                     dump($campuses);
                 }else{
                     $campuses = $campusRepository->findAll();
