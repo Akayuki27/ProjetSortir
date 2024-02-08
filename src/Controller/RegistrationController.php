@@ -48,20 +48,14 @@ class RegistrationController extends AbstractController
             $entityManager->persist($user);
             $entityManager->flush();
             // do anything else you need here, like send an email
-
-<<<<<<< Updated upstream
-            return $this->redirectToRoute('sortie_list');
-=======
+            
             return $this->redirectToRoute('app_admin_participant_liste');
->>>>>>> Stashed changes
         }
 
         return $this->render('registration/register.html.twig', [
             'registrationForm' => $form->createView(),
         ]);
     }
-
-
 
     #[Route('/register/csv', name: 'app_register_csv')]
     public function CSVRegister(Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $entityManager): Response

@@ -22,6 +22,7 @@
         <button type="submit" class="btn-little">Rechercher</button>
     </form>
 
+<div class="participant-container">
      {% if campuses is not empty %}
             <ul>
                 {# Boucle à travers chaque campus / pas de filtre #}
@@ -42,6 +43,7 @@
     {% else %}
         <p>Aucun campus trouvé !</p>
     {% endif %}
+<div>
 
 
 {% endblock %}
