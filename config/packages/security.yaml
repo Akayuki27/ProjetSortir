@@ -41,6 +41,9 @@ security:
         - { path: ^/app_register, roles: ROLE_ADMIN }
         - { path: ^/sortie, roles: ROLE_USER }
         - { path: ^/profil, roles: ROLE_USER }
+        - { path: ^/register, roles: ROLE_USER }
+        - { path: ^/main, roles: ROLE_USER }
+
 
     role_hierarchy:
         ROLE_ADMIN: ROLE_USER
