@@ -50,14 +50,14 @@
                     <label for="{{ form.Lieu.vars.id }}">Lieu</label>
                     {{ form_widget(form.Lieu) }}
                 </div>
+                <div class="form-btn">
+                    <button type="submit" class="btn">Ajouter !</button>
+                </div>
                 <div class="form-item">
-                    <p class="precision">Si le lieu n'est pas dans la liste vous pouvez le créer :</p>
+                    <p class="precision">Si le lieu n'est pas dans la liste vous pouvez le créer ici :</p>
                 </div>
                 <div class="form-link">
                     <a href="{{ path("sortie_lieu") }}" title="lieu">Créer un lieu</a>
-                </div>
-                <div class="form-btn">
-                    <button type="submit" class="btn">Ajouter !</button>
                 </div>
             </div>
             {{ form_end(form) }}

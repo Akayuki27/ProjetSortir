@@ -37,9 +37,11 @@ nav {
    gap: 20px;
    padding-right: 20px;
 }
+
 a {
    color: deeppink;
 }
+
 a:active, a:hover {
    color: #ececec;
 }
@@ -50,6 +52,19 @@ nav a {
 
 footer p {
    padding : 20px;
+}
+
+.btn {
+   background-color: #004982;
+   color: #ececec;
+   border: none;
+   padding: 10px;
+   border-radius: 5px;
+   font-size: 1.2em;
+}
+
+.btn:hover {
+   background-color: #13395d;
 }
 
 .header-container{
@@ -71,10 +86,6 @@ footer p {
    border-top: 1px solid #5e5e5e;
    font-size: 0.8em;
    font-weight: 400;
-}
-
-a:visited {
-   color: pink;
 }
 
 .form-super-container {
@@ -109,17 +120,6 @@ a:visited {
    flex-direction: row;
    justify-content: center;
 }
-
-.btn {
-   background-color: #154981;
-   color: #ececec;
-   border: none;
-   padding: 10px;
-   border-radius: 5px;
-   font-size: 1.2em;
-}
-
-
 
 .profil-super-container {
    display: flex;
@@ -167,13 +167,46 @@ a:visited {
    background-color: #4CAF50;
    color: white;
 }
+.sortie-container {
+   display: flex;
+   flex-direction: column;
+   background-color: hotpink;
+}
 
 .flash-error {
    background-color: #f44336;
    color: white;
+}
+.sortie-form-super-container {
+   display: flex;
+   flex-direction: column;
+   background-color: #282828;
 }
 
 .flash-warning {
    background-color: #ff9800;
    color: white;
 }
+
+.sortie-form-container {
+   display: flex;
+   flex-direction: row;
+   background-color: darkgreen;
+   padding: 10px;
+   gap: 20px;
+}
+
+.filtre-bloc1 {
+   display: flex;
+   flex-direction: column;
+   gap: 20px;
+
+}
+
+.filtre-bloc1B {
+   display: flex;
+   flex-direction: row;
+   background-color: #92a82c;
+}
+
+
