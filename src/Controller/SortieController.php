@@ -76,6 +76,7 @@ class SortieController extends AbstractController
     public function list(SortieRepository $repository, Request $request,
     ParticipantRepository $repo): Response
     {
+        $today = new \DateTime();
         $user = $this->getUser();
         $id = $repo->findOneBy(['pseudo' => $user->getUserIdentifier()])->getId();
         $data = new SearchData();
@@ -84,7 +85,8 @@ class SortieController extends AbstractController
         $sorties = $repository->findSearch($data, $id);
         return $this->render('sortie/list.html.twig', [
         'sorties' => $sorties,
-            'form' => $form
+            'form' => $form,
+            'today' => $today
         ]);
     }
 

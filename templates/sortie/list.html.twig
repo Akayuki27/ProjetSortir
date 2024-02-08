@@ -8,6 +8,11 @@
 {% endblock %}
 {% block body %}
     <h1>Liste des sorties</h1>
+
+    <div class="high-right">
+        <p>Date du jour: {{ today | date('d-m-Y') }}</p>
+        <p>Participant: {{ app.user.pseudo }}</p>
+    </div>
     <div class="form-super-container">
         {# formulaire de recherche #}
         {{ form_errors(form) }}
