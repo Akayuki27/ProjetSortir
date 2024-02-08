@@ -24,7 +24,8 @@ use Symfony\Component\Routing\Annotation\Route;
 class SortieController extends AbstractController
 {
     #[Route('/create', name: 'create')]
-    public function create(Request $request, EntityManagerInterface $entityManager): Response
+    public function create(Request $request, EntityManagerInterface $entityManager,
+                            EtatRepository $etatRepository): Response
     {
 
         $sortie = new Sortie();
@@ -33,6 +34,7 @@ class SortieController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $sortie->setOrganisateur($this->getUser());
             $sortie->addParticipant($sortie->getOrganisateur());
+            $sortie->setEtat($etatRepository->findOneBy(['libelle' => 'ouverte']));
 
             //sauvegarde et redirection
             $entityManager->persist($sortie);
