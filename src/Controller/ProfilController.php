@@ -14,19 +14,17 @@ use Symfony\Component\Routing\Annotation\Route;
 #[Route('/profil', name: 'app_profil')]
 class ProfilController extends AbstractController
 {
-    #[Route('/modification', name: '_modification')]
-    public function register(Request $request, EntityManagerInterface $em): Response
+    #[Route('/modification/{id}', name: '_modification')]
+    public function register(Request $request,int $id ,EntityManagerInterface $em, ParticipantRepository $pm): Response
     {
         // Récupérer l'utilisateur connecté
-        $user = $this->getUser();
-
-        $pseudo = $user ? $user->getPseudo() : null;
+        $user = $pm->find($id);
 
         // Créer le formulaire en passant l'entité Participant
-        $form = $this->createForm(ModifProfilType::class, $user, ['pseudo' => $pseudo]);
-
+        $form = $this->createForm(ModifProfilType::class, $user, ['pseudo' => $user->getPseudo()]);
         // Traitement du formulaire soumis
         $form->handleRequest($request);
+
         if ($form->isSubmitted() && $form->isValid()) {
             // Gérer le téléchargement de la photo
             $photoFile = $form->get('imgName')->getData();
