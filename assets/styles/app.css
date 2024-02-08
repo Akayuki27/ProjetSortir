@@ -37,7 +37,7 @@ nav {
 }
 
 a {
-   color: #004982;
+   color: #00569d;
 }
 
 a:active, a:hover {
@@ -53,7 +53,7 @@ footer p {
 }
 
 .btn {
-   background-color: #004982;
+   background-color: #00569d;
    color: #ececec;
    border: none;
    padding: 10px;
@@ -62,7 +62,7 @@ footer p {
 }
 
 .btn-little {
-   background-color: #004982;
+   background-color: #00569d;
    color: #ececec;
    border: none;
    padding: 5px;
@@ -292,7 +292,7 @@ footer p {
 }
 
 .flash-success, .flash-error, .flash-warning{
-   background-color: #13395d;
+   background-color: #00569d;
    color: #ececec;
    text-align : center;
    margin-bottom: 20px;

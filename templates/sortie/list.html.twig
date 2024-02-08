@@ -72,10 +72,15 @@
             <p>Nombre d'inscrits: {{ sortie.participants | length }}/{{ sortie.nbInscriptionMax }}</p>
             <p>Clôture des inscriptions: {{ sortie.dateLimiteInscription | date }}</p>
             {% if is_granted("ROLE_ADMIN") or app.user == sortie.organisateur %}
-            <a href="{{ path('sortie_modifier', {'id':sortie.id}) }}" title="modifier">Modifier</a>
-            <a href="{{ path('sortie_annuler', {'id':sortie.id}) }}" title="annuler">Annuler</a>
-            <a href="{{ path('sortie_delete', {'id':sortie.id}) }}" title="delete">Supprimer</a>
-            <a href="{{ path('sortie_details', {'id':sortie.id}) }}" title="delete">Détail</a>
+            <div class="participant-modif">
+                <a href="{{ path('sortie_details', {'id':sortie.id}) }}" title="delete">Détail</a>
+                <a href="{{ path('sortie_modifier', {'id':sortie.id}) }}" title="modifier">Modifier</a>
+            </div>
+            <div class="participant-modif">
+                <a href="{{ path('sortie_annuler', {'id':sortie.id}) }}" title="annuler">Annuler</a>
+                <a href="{{ path('sortie_delete', {'id':sortie.id}) }}" title="delete"
+                   onclick="return confirm('Êtes-vous sûr de vouloir bousiller cette activitée ?')">Supprimer</a>
+            </div>
             {% endif %}
         </div>
         {% endfor %}
