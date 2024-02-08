@@ -21,7 +21,8 @@ class Sortie
     private ?string $nom = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
-    #[Assert\GreaterThanOrEqual(propertyPath: 'dateLimiteInscription')]
+    #[Assert\GreaterThanOrEqual(propertyPath: 'dateLimiteInscription', message: 'La date et l\'heure de début doivent être postérieures à la date limite d\'inscription.')]
+    #[Assert\GreaterThanOrEqual(value: "now",message: 'La date et l\'heure de début doivent être postérieures ou égales à la date et l\'heure actuelles.')]
     private ?\DateTimeInterface $dateHeureDebut = null;
 
     #[ORM\Column]
