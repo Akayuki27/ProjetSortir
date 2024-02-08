@@ -5,71 +5,80 @@
     <div class="title-container">
         <h1>Liste des sorties</h1>
     </div>
-{% endblock %}
-{% block body %}
-    <h1>Liste des sorties</h1>
-
     <div class="high-right">
         <p>Date du jour: {{ today | date('d-m-Y') }}</p>
         <p>Participant: {{ app.user.pseudo }}</p>
     </div>
-    <div class="form-super-container">
+{% endblock %}
+{% block body %}
+    <div class="sortie-container">
+    <div class="sortie-form-super-container">
         {# formulaire de recherche #}
         {{ form_errors(form) }}
         {{ form_start(form) }}
-    <div class="form-container">
-
-    <div class="form-item">
-        {{ form_label(form.campus) }}
-        {{ form_widget(form.campus) }}
-    </div>
-        <div class="form-item">
-            {{ form_label(form.q) }}
-            {{ form_widget(form.q) }}
+    <div class="sortie-form-container">
+        <div class="filtre-bloc1">
+            <div class="filtre-bloc1A">
+                <div class="form-item">
+                    {{ form_label(form.campus) }}
+                    {{ form_widget(form.campus) }}
+                </div>
+                <div class="form-item">
+                    {{ form_label(form.q) }}
+                    {{ form_widget(form.q) }}
+                </div>
+            </div>
+            <div class="filtre-bloc1B">
+                <div class="form-item">
+                    {{ form_label(form.min) }}
+                    {{ form_widget(form.min) }}
+                </div>
+                <div class="form-item">
+                    {{ form_label(form.max) }}
+                    {{ form_widget(form.max) }}
+                </div>
+            </div>
         </div>
-        <div class="form-item">
-            {{ form_label(form.min) }}
-            {{ form_widget(form.min) }}
+        <div class="filtre-bloc2">
+            <div class="form-item">
+                {{ form_label(form.organisateur) }}
+                {{ form_widget(form.organisateur) }}
+            </div>
+            <div class="form-item">
+                {{ form_label(form.inscrit) }}
+                {{ form_widget(form.inscrit) }}
+            </div>
+            <div class="form-item">
+                {{ form_label(form.nonInscrit) }}
+                {{ form_widget(form.nonInscrit) }}
+            </div>
+            <div class="form-item">
+                {{ form_label(form.passe) }}
+                {{ form_widget(form.passe) }}
+            </div>
         </div>
-        <div class="form-item">
-            {{ form_label(form.max) }}
-            {{ form_widget(form.max) }}
-        </div>
-        <div class="form-item">
-            {{ form_label(form.organisateur) }}
-            {{ form_widget(form.organisateur) }}
-        </div>
-        <div class="form-item">
-            {{ form_label(form.inscrit) }}
-            {{ form_widget(form.inscrit) }}
-        </div>
-        <div class="form-item">
-            {{ form_label(form.nonInscrit) }}
-            {{ form_widget(form.nonInscrit) }}
-        </div>
-        <div class="form-item">
-            {{ form_label(form.passe) }}
-            {{ form_widget(form.passe) }}
-        </div>
-
+        <div class="filtre-bloc3">
         <button type="submit" class="btn">Rechercher</button>
+        </div>
     </div>
         {{ form_end(form) }}
     </div>
-<div class="profil-container">
-    {% for sortie in sorties %}
-    <div class="container">
-        <a href="{{ path('sortie_details', {'id':sortie.id}) }}" title="details">{{ sortie.nom }}</a>
-        <p>Lieu: {{ sortie.lieu.nom }}</p>
-        <p>Date de la sortie: {{ sortie.dateHeureDebut | date }}</p>
-        <p>Nombre d'inscrits: {{ sortie.participants | length }}/{{ sortie.nbInscriptionMax }}</p>
-        <p>Clôture des inscriptions: {{ sortie.dateLimiteInscription | date }}</p>
-        {% if is_granted("ROLE_ADMIN") or app.user == sortie.organisateur %}
-        <a href="{{ path('sortie_modifier', {'id':sortie.id}) }}" title="modifier">Modifier</a>
-        <a href="{{ path('sortie_annuler', {'id':sortie.id}) }}" title="annuler">Annuler la sortie</a>
-        <a href="{{ path('sortie_delete', {'id':sortie.id}) }}" title="delete">Supprimer la sortie</a>
-        {% endif %}
+
+    <div class="list-super-container">
+        {% for sortie in sorties %}
+        <div class="list-container">
+            <a href="{{ path('sortie_details', {'id':sortie.id}) }}" title="details">{{ sortie.nom }}</a>
+            <p>Lieu: {{ sortie.lieu.nom }}</p>
+            <p>Date de la sortie: {{ sortie.dateHeureDebut | date }}</p>
+            <p>Nombre d'inscrits: {{ sortie.participants | length }}/{{ sortie.nbInscriptionMax }}</p>
+            <p>Clôture des inscriptions: {{ sortie.dateLimiteInscription | date }}</p>
+            {% if is_granted("ROLE_ADMIN") or app.user == sortie.organisateur %}
+            <a href="{{ path('sortie_modifier', {'id':sortie.id}) }}" title="modifier">Modifier</a>
+            <a href="{{ path('sortie_annuler', {'id':sortie.id}) }}" title="annuler">Annuler la sortie</a>
+            <a href="{{ path('sortie_delete', {'id':sortie.id}) }}" title="delete">Supprimer la sortie</a>
+            {% endif %}
+        </div>
+        {% endfor %}
     </div>
-    {% endfor %}
-</div>
+    </div>
 {% endblock %}
