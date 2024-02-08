@@ -24,6 +24,7 @@ class SearchForm extends AbstractType
                 'required' => false,
                 'class' => Campus::class,
                 'choice_label' => 'nom',
+                'placeholder' => 'Selectionner un campus'
             ])
             ->add('q', TextType::class, [
                 'label' => 'Le nom de la sortie contient: ',

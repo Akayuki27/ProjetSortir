@@ -11,7 +11,7 @@
     {#formulaire d'ajout #}
     <form action="{{ path('app_admin_campus', {'action': 'ajouter'}) }}" method="post">
         <label for="nom">Nouveau campus :</label>
-        <input type="text" id="nom" name="nom" required>
+        <input type="text" id="nom" name="nom" placeholder="Ajouter un campus" required>
         <button type="submit">Ajouter</button>
     </form>
 
