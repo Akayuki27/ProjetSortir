@@ -129,6 +129,7 @@ footer p {
    display: flex;
    flex-direction: row;
    justify-content: space-between;
+   gap: 10px;
    width: 100%;
 }
 
@@ -219,6 +220,7 @@ footer p {
 .filtre-bloc1B {
    display: flex;
    flex-direction: row;
+   gap: 10px;
 }
 
 .filtre-bloc1A {

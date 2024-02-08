@@ -7,33 +7,33 @@
 {% endblock %}
 {% block body %}
 
-    <h1>Gérer les villes</h1>
-
-    <div>
+    <div class="campus-container">
+        <div>
+            {{ form_start(ajoutVille) }}
+            {{ form_widget(ajoutVille.nom) }}
+            {{ form_widget(ajoutVille.codePostal) }}
+            <button class="btn-little">Ajouter</button>
+            {{ form_end(ajoutVille) }}
+        </div>
         {# formulaire de filtre #}
         <form action="{{ path('app_admin_villes') }}" method="get">
             <input type="hidden" name="action" value="filtrer">
             <input type="text" name="filtrer" placeholder="">
-            <button type="submit">Rechercher</button>
+            <button class="btn-little" type="submit">Rechercher</button>
         </form>
     </div>
 
-    <div>
-        <div>Villes</div>
-        {{ form_start(ajoutVille) }}
-        {{ form_widget(ajoutVille.nom) }}
-        {{ form_widget(ajoutVille.codePostal) }}
-        <button>Ajouter</button>
-        {{ form_end(ajoutVille) }}
-
-
+    <div class="participant-container">
     {% for ville in villes %}
-        <div>
-
-            {{ ville.nom }}
-            {{ ville.codePostal }}
-            <a href="{{ path('app_admin_villes_modifier', {'id':ville.id}) }}">Modifier</a> -
-            <a href="{{ path('app_admin_villes_supprimer', {'id':ville.id}) }}" onclick="confirm('Êtes-vous sûr de vouloir anéantir cette ville ?')">Supprimer</a>
+        <div class="participant-item">
+            <div class="participant-modif">
+                {{ ville.nom }}
+                {{ ville.codePostal }}
+            </div>
+            <div class="participant-modif">
+                <a href="{{ path('app_admin_villes_modifier', {'id':ville.id}) }}">Modifier</a>
+                <a href="{{ path('app_admin_villes_supprimer', {'id':ville.id}) }}" onclick="confirm('Êtes-vous sûr de vouloir anéantir cette ville ?')">Supprimer</a>
+            </div>
         </div>
     {% endfor %}
     </div>
