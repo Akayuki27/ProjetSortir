@@ -5,6 +5,7 @@ namespace App\Repository;
 use App\Data\SearchData;
 use App\Entity\Sortie;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
 
 
@@ -18,7 +19,7 @@ use Doctrine\Persistence\ManagerRegistry;
  */
 class SortieRepository extends ServiceEntityRepository
 {
-    public function __construct(ManagerRegistry $registry)
+    public function __construct(ManagerRegistry $registry, private EntityManagerInterface $em, private EtatRepository $etatRepository)
     {
         parent::__construct($registry, Sortie::class);
     }
@@ -85,20 +86,28 @@ class SortieRepository extends ServiceEntityRepository
     }
 
 
-//    /**
-//     * @return Sortie[] Returns an array of Sortie objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('s')
-//            ->andWhere('s.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('s.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
+    /**
+     * @return Sortie[] Returns an array of Sortie objects
+     */
+    public function findByDate(): array
+    {
+        $value = new \DateTime();
+        return $this->createQueryBuilder('s')
+            ->andWhere('s.dateHeureDebut < :val')
+            ->setParameter('val', $value)
+            ->getQuery()
+           ->getResult()
+        ;
+    }
+
+    public function updateEtat(): void
+    {
+        $sorties = $this->findByDate();
+        foreach ($sorties as $sortie) {
+            $sortie->setEtat($this->etatRepository->findOneBy(['libelle' => 'passée']));
+            $this->em->flush();
+        }
+    }
 
 //    public function findOneBySomeField($value): ?Sortie
 //    {
