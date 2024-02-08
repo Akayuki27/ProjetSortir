@@ -1,16 +1,25 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}{% endblock %}
-{% block titrepage %}Liste des participants{% endblock %}
+{% block titrepage %}
+    <div class="title-container">
+        <h1>Liste des participants</h1>
+    </div>
+{% endblock %}
 {% block body %}
-    <div class="">
-    {% for participant in participants %}
-        <div class="">
-            <div class=""><p>{{ participant.pseudo }}</p></div>
-            <div class=""><p>{{ participant.lastname | upper }} {{ participant.firstname }}</p></div>
-            <div class=""><a href="{{ path('app_profil_modification' , {'id' : participant.id} )}}">Modifier le participant</a></div>
-            <div class=""><a href="{{ path('app_admin_participant_supprimer', {'id': participant.id}) }}">Supprimer le participant</a><div>
-        </div>
-    {% endfor %}
-            </div>
+    <div class="participant-super-container">
+        <div class="participant-container">
+
+                {% for participant in participants %}
+                    <div class=""><p>{{ participant.pseudo }}</p></div>
+                    <div class=""><p>{{ participant.lastname | upper }} {{ participant.firstname }}</p></div>
+
+
+                    <div class=""><a href="{{ path('app_profil_modification' , {'id' : participant.id} )}}">Modifier</a></div>
+                    <div class=""><a href="{{ path('app_admin_participant_supprimer', {'id': participant.id}) }}",
+                                     onclick="return confirm('Êtes-vous sûr de vouloir anéantir ce type ?')">Supprimer</a><div>
+                {% endfor %}
+
+    </div>
+    </div>
 {% endblock %}
