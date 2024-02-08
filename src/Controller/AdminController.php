@@ -156,6 +156,7 @@ class AdminController extends AbstractController
         return $this->render('admin/modifVille.html.twig', [
         'form' => $form, 'ville' => $ville]);
     }
+
     #[Route('/listeParticipant', name: '_participant_liste')]
     public function listeParticipant(Request $request,ParticipantRepository $pr, EntityManagerInterface $entityManager): Response
     {
