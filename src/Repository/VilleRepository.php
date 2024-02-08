@@ -26,16 +26,18 @@ class VilleRepository extends ServiceEntityRepository
     /**
      * @return Ville[] Returns an array of Ville objects
      */
-    public function findByNom($value): array
+    public function findByNom($data): array
     {
-
-        $qb = $this->createQueryBuilder('c');
-
-            $qb->andWhere('c.nom LIKE :nom')
-                ->setParameter('nom', '%'.$value.'%');
+        $qb = $this->createQueryBuilder('v')
+            ->where('v.nom LIKE :nom')
+            ->setParameter('nom', '%' . $data . '%');
 
         return $qb->getQuery()->getResult();
     }
+
+
+
+
 
 //    public function findOneBySomeField($value): ?Ville
 //    {
