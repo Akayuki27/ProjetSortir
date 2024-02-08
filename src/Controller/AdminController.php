@@ -54,7 +54,7 @@ class AdminController extends AbstractController
 
             $data = $request->query->get('filtrer');
             if ($data) {
-                $villes = $villeRepository->findBy(['nom' => $data]);
+                $villes = $villeRepository->findByNom($data);
             }else {
                 $villes = $villeRepository->findAll();
             }
