@@ -106,40 +106,42 @@
 
     <script src="{{ asset('script/redirect.js') }}"></script>
     <script>
+        window.addEventListener('load', (e) => {
             console.log(148);
-        // define current = screen
-        mobile_screen = detectScreenSize();
-        current = mobile_screen;
-
-        console.log(current);
-        console.log(mobile_screen);
-
-        // First time we load we need to execute correct function
-        if (mobile_screen) {
-            changeContent('mobile');
-        } else {
-            // fonction qui fait ajax avec code si on est pas en mobile
-            changeContent('default');
-        }
-
-        // Then do the same everytime we resize
-        window.addEventListener('resize', function (e) {
+            // define current = screen
             mobile_screen = detectScreenSize();
+            current = mobile_screen;
 
-            // If current !== screen => We need to change the display type
-            // Else it means we're already in the good case, do nothing
-            if (current !== mobile_screen) {
-                current = mobile_screen;
-                console.log('1');
-                if (mobile_screen) {
-                    changeContent('mobile');
-                } else {
-                    // fonction qui fait ajax avec code si on est pas en mobile
-                    changeContent('default');
-                }
+            console.log(current);
+            console.log(mobile_screen);
+
+            // First time we load we need to execute correct function
+            if (mobile_screen) {
+                changeContent('mobile');
             } else {
-                console.log('2');
+                // fonction qui fait ajax avec code si on est pas en mobile
+                changeContent('default');
             }
-        });
+
+            // Then do the same everytime we resize
+            window.addEventListener('resize', function (e) {
+                mobile_screen = detectScreenSize();
+
+                // If current !== screen => We need to change the display type
+                // Else it means we're already in the good case, do nothing
+                if (current !== mobile_screen) {
+                    current = mobile_screen;
+                    console.log('1');
+                    if (mobile_screen) {
+                        changeContent('mobile');
+                    } else {
+                        // fonction qui fait ajax avec code si on est pas en mobile
+                        changeContent('default');
+                    }
+                } else {
+                    console.log('2');
+                }
+            });
+        })
     </script>
 {% endblock %}
