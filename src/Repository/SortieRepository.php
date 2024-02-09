@@ -118,12 +118,12 @@ class SortieRepository extends ServiceEntityRepository
             ->select('c', 'p', 's')
             ->join('s.campus', 'c')
             ->leftJoin('s.participants', 'p')
-            ->andWhere(':id MEMBER OF s.participants')
-            ->setParameter('id', $user->getId())
-            ->andWhere('c.id = :campus')
+            ->orWhere('c.id = :campus')
             ->setParameter('campus', $user->getEstRattacheA()->getId())
-                ->andWhere('s.organisateur = :organisateur')
-                ->setParameter('organisateur', $user->getId());
+                ->orWhere('s.organisateur = :organisateur')
+                ->setParameter('organisateur', $user->getId())
+        ->orWhere(':id MEMBER OF s.participants')
+            ->setParameter('id', $user->getId());
         return $query->getQuery()->getResult();
     }
 
