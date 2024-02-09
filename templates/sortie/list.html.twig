@@ -12,6 +12,7 @@
     </div>
 {% endblock %}
 {% block body %}
+    <div id="foo">
     <div class="sortie-form-super-container">
         {# formulaire de recherche #}
         {{ form_errors(form) }}
@@ -96,10 +97,28 @@
             </div>
         {% endfor %}
     </div>
+    </div>
 {% endblock %}
 
 {% block javascripts %}
     {{ parent() }} {# Cette ligne permet d'inclure les scripts JavaScript déjà présents dans le fichier de base #}
 
-    <script src="{{ asset('script/redirect.js') }}"></script> {# Remplacez 'nom_du_fichier.js' par le chemin vers votre fichier JavaScript #}
+    <script src="{{ asset('script/redirect.js') }}"></script>
+    <script>
+        if (screen) {
+            function changeContent() {
+                var xhttp = new XMLHttpRequest();
+                xhttp.onreadystatechange = function() {
+                    if (this.readyState === 4 && this.status === 200) {
+                        document.getElementById("foo").innerHTML =
+                            this.responseText;
+                    }
+                };
+                xhttp.open("GET", "/sortie/mesSorties", true);
+                xhttp.send();
+                console.log('done');
+            }
+            changeContent();
+        }
+    </script> {# Remplacez 'nom_du_fichier.js' par le chemin vers votre fichier JavaScript #}
 {% endblock %}
