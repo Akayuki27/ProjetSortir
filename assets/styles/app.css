@@ -13,7 +13,7 @@ main {
    display: flex;
    flex-direction: column;
    width: 94%;
-   margin: 30px auto;
+   margin: 30px auto 100px;
 }
 
 footer {
