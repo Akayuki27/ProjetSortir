@@ -12,6 +12,8 @@ use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\File;
+use Symfony\Component\Validator\Constraints\Image;
 
 class ModifProfilType extends AbstractType
 {
@@ -36,9 +38,22 @@ class ModifProfilType extends AbstractType
                 'required' => false,
             ])
             ->add('imgName', FileType::class, [
+                'label' => 'Image (JPG, JPEG)',
+                'mapped' => false,
                 'required' => false,
-                'data_class'=> null,
-            ])
+                'data_class'=> null, // Pour éviter les erreurs liées à la validation des données
+                'constraints' => [
+                    new File([
+                        'maxSize' => '5M',
+                        'mimeTypes' => [
+                            'image/jpeg',
+                            'image/pjpeg', // Certains navigateurs envoient des images JPEG avec ce type MIME
+                            'image/png',
+                        ],
+                        'mimeTypesMessage' => 'Veuillez télécharger une image JPG ou JPEG valide',
+                    ]),
+                ],
+            ]);
         ;
     }
 

@@ -79,7 +79,7 @@
                     </div>
                 {% endif %}
                 <p>Lieu: {{ sortie.lieu.nom }}</p>
-                <p>Date de la sortie : {{ sortie.dateHeureDebut | format_datetime('full', 'short', locale='fr') }}</p>
+                <p>Date de la sortie : {{ sortie.dateHeureDebut | format_datetime('full', 'short', locale='fr') | capitalize}}</p>
                 <p>Nombre d'inscrits : {{ sortie.participants | length }}/{{ sortie.nbInscriptionMax }}</p>
                 <p>Clôture des inscriptions : {{ sortie.dateLimiteInscription | format_datetime('full', 'short', locale='fr') }}</p>
                 {% if is_granted("ROLE_ADMIN") or app.user == sortie.organisateur %}

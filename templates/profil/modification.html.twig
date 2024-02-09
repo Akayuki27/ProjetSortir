@@ -36,11 +36,15 @@
                 {{ form_widget(modificationProfil.estRattacheA) }}
             </div>
             <div class="form-item">
-                <label for="{{ modificationProfil.imgName.vars.id }}">Photo</label>
+                <label for="{{ modificationProfil.imgName.vars.id }}">Photo (PNG, JPG ou JPEG)</label>
                 {{ form_widget(modificationProfil.imgName) }}
             </div>
+            <div class="form-item">
+                <label for="{{ modificationProfil.isActive.vars.id }}">Actif</label>
+                {{ form_widget(modificationProfil.isActive) }}
+            </div>
             <div class="form-btn">
-                <button type="submit" class="btn">Inscrire</button>
+                <button type="submit" class="btn">Modifier</button>
             </div>
         </div>
         {{ form_end(modificationProfil) }}

@@ -239,4 +239,5 @@ class SortieController extends AbstractController
         $this->addFlash('success', 'Vous avez été enlevé de cette sortie avec succès !');
         return $this->redirectToRoute('sortie_details', ['id'=>$sortie->getId()]);
     }
+
 }

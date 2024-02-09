@@ -7,6 +7,7 @@ use App\Form\ModifProfilType;
 use App\Repository\ParticipantRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Form\FormError;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -41,7 +42,9 @@ class ProfilController extends AbstractController
 
             // Rediriger l'utilisateur vers une autre page après la modification
             $this->addFlash('success', 'Profil modifié! Good job!');
-            return $this->redirectToRoute('app_main');
+            return $this->redirectToRoute('sortie_list');
+        } else {
+            $form->get('imgName')->addError(new FormError('Le fichier que vous avez télécharger ne correspond pas à nos validation'));
         }
 
         // Afficher le formulaire dans le template Twig

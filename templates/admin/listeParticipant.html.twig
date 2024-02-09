@@ -11,7 +11,7 @@
                 {% for participant in participants %}
                     <div class="participant-item">
                     <div class="">
-                        <p>{{ participant.pseudo }}</p>
+                        <a href="{{ path('app_profil', {'id' :participant.id}) }}">{{ participant.pseudo }}</a>
                         <p>{{ participant.lastname | upper }} {{ participant.firstname }}</p>
                     </div>
                     <div class="participant-modif">
