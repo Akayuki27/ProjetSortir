@@ -72,6 +72,14 @@ footer p {
    min-width: 80px;
 }
 
+.btn-little a {
+   color: #ececec;
+}
+
+.btn-little a:hover {
+   color: #ececec;
+}
+
 .btn:hover, .btn-little:hover {
    background-color: #13395d;
 }
