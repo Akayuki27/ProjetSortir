@@ -93,6 +93,24 @@ class SortieController extends AbstractController
         ]);
     }
 
+    #[Route('/listPc', name: 'listPc')]
+    public function listPc(SortieRepository $repository, Request $request,
+                         ParticipantRepository $repo): Response
+    {
+        $today = new \DateTime();
+        $user = $this->getUser();
+        $id = $repo->findOneBy(['pseudo' => $user->getUserIdentifier()])->getId();
+        $data = new SearchData();
+        $form = $this->createForm(SearchForm::class, $data);
+        $form->handleRequest($request);
+        $sorties = $repository->findSearch($data, $id);
+        return $this->render('sortie/listPc.html.twig', [
+            'sorties' => $sorties,
+            'form' => $form,
+            'today' => $today
+        ]);
+    }
+
     #[Route('/mesSorties', name: 'mes_sorties')]
     public function mesSorties(SortieRepository $repository, Request $request,
                          ParticipantRepository $repo): Response

@@ -1,13 +1,13 @@
 // Fonction pour détecter la largeur de l'écran
 function detectScreenSize() {
     var width = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
-    let screen = false;
+    let mobile_screen = false;
     // Redirection en fonction de la largeur de l'écran
     if (width < 768) { // Exemple : rediriger si la largeur est inférieure à 768px
        // window.location.href = '{{ path("mes_sorties") }}'; // Remplacez 'page_petit_ecran' par l'URL de la page de redirection pour les petits écrans
-        screen = true;
+        mobile_screen = true;
     }
-    return screen;
+    return mobile_screen;
 }
 
 function changeContent(type) {
@@ -21,12 +21,12 @@ function changeContent(type) {
     if (type === 'mobile') {
         xhttp.open("GET", "/sortie/mesSorties", true);
     } else {
-        xhttp.open("GET", "/sortie/list", true);
+        xhttp.open("GET", "/sortie/listPc", true);
 
     }
     xhttp.send();
 }
 
-// Appel de la fonction au chargement de la page
-window.onload = detectScreenSize;
+
+
 
