@@ -328,19 +328,21 @@ footer p {
    display: none;
 }
 
+#petiteNav {
+   display: none;
+}
+
 /***************** MEDIA QUERIES ***********************/
 
-@media screen and (max-width: 750px) {
+@media screen and (max-width: 1600px) {
 
-   body {
-      background-color: #ff9800;
+   #petiteNav {
+      display: flex;
    }
 
-   .nav_mobile {
-      visibility: hidden;
+   #grosseNav {
       display: none;
    }
-
 }
 
 @media screen and (max-width: 1000px) {
@@ -368,5 +370,39 @@ footer p {
    #logopink {
       display: block;
    }
+
+   .nav_mobile {
+      visibility: hidden;
+      display: none;
+   }
+}
+
+@media screen and (max-width: 750px) {
+
+   body {
+      background-color: #111111;
+   }
+
+   a {
+      color: #1084ef;
+   }
+
+   .btn, .btn-little {
+      background-color: #00569d;
+   }
+
+   .btn:hover, .btn-little:hover {
+      background-color: #13395d;
+   }
+
+   #logoblue {
+      display: block;
+   }
+
+   #logopink {
+      display: none;
+   }
+
+
 
 }
