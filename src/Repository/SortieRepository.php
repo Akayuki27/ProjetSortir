@@ -109,6 +109,33 @@ class SortieRepository extends ServiceEntityRepository
         }
     }
 
+
+
+
+    public function findByDateArchived(): array
+    {
+        $value = new \DateTime();
+        $value->modify('- 1 month');
+
+        return $this->createQueryBuilder('s')
+            ->andWhere('s.dateHeureDebut < :val')
+            ->setParameter('val', $value)
+            ->getQuery()
+            ->getResult()
+            ;
+    }
+
+    public function ArchivedEtat(): void
+    {
+        $sorties = $this->findByDateArchived();
+        foreach ($sorties as $sortie) {
+            $sortie->setEtat($this->etatRepository->findOneBy(['libelle' => 'archivée']));
+            $this->em->flush();
+        }
+    }
+
+
+
 //    public function findOneBySomeField($value): ?Sortie
 //    {
 //        return $this->createQueryBuilder('s')
@@ -118,4 +145,6 @@ class SortieRepository extends ServiceEntityRepository
 //            ->getOneOrNullResult()
 //        ;
 //    }
+
+
 }
