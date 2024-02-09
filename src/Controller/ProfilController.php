@@ -43,12 +43,10 @@ class ProfilController extends AbstractController
             // Rediriger l'utilisateur vers une autre page après la modification
             $this->addFlash('success', 'Profil modifié! Good job!');
             return $this->redirectToRoute('sortie_list');
-        } else {
-            $this->addFlash('error', 'Le formulaire n\'est pas valide, veuillez bien respecter les champs');
-            return $this->render('profil/modification.html.twig', [
-                'modificationProfil' => $form->createView(),
-            ]);
         }
+        return $this->render('profil/modification.html.twig', [
+            'modificationProfil' => $form->createView(),
+        ]);
     }
 
     #[Route('/{id}', name: '')]

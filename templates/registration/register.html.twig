@@ -40,8 +40,9 @@
                 {{ form_widget(registrationForm.estRattacheA) }}
             </div>
             <div class="form-item">
-                <label for="{{ registrationForm.ImgName.vars.id }}">Photo</label>
-                {{ form_widget(registrationForm.ImgName) }}
+                <label for="{{ registrationForm.imgName.vars.id }}">Photo (PNG, JPG ou JPEG)</label>
+                {{ form_widget(registrationForm.imgName) }}
+                {{ form_errors(registrationForm.imgName) }}
             </div>
             <div class="form-item justify-center">
             <a href="{{ path('app_register_csv') }}">Ajouter plusieurs utilisateurs ?</a>
