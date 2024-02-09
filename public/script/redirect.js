@@ -12,3 +12,4 @@ function detectScreenSize() {
 
 // Appel de la fonction au chargement de la page
 window.onload = detectScreenSize;
+

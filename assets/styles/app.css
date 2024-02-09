@@ -350,6 +350,10 @@ footer p {
    display: none;
 }
 
+#logophone {
+   display: none;
+}
+
 #petiteNav {
    display: none;
 }
@@ -458,12 +462,12 @@ footer p {
       display: none;
    }
 
-   #logoblue {
-      display: block;
+   #logoblue,  #logopink {
+      display: none;
    }
 
-   #logopink {
-      display: none;
+   #logophone {
+      display: block;
    }
 
    #grosseNav {
