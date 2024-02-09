@@ -7,6 +7,8 @@
     </div>
 {% endblock %}
 {% block body %}
+<div class="participant-container">
+    <div class="participant-item">
     <h1>{{ sortie.nom }}</h1>
     <div>
         {% if sortie.etat.libelle == 'annulée' %}
@@ -32,15 +34,13 @@
     <div>
         <h2>Liste des participants</h2><br>
         <div>
-        <ul>
         {% set userIsParticipant = false %}
         {% for participant in sortie.participants %}
             {% if app.user == participant %}
                 {% set userIsParticipant = true %}
             {% endif %}
-            <li><a href="{{ path('app_profil', {'id' :participant.id}) }}">{{ participant.firstname }} {{ participant.lastname }}</a></li><br>
+            <a href="{{ path('app_profil', {'id' :participant.id}) }}">{{ participant.firstname }} {{ participant.lastname }}</a></li><br>
         {% endfor %}
-        </ul>
             <p>Nombre de participants: {{ sortie.participants | length }}</p>
         </div><br>
         {% if userIsParticipant %}
@@ -48,7 +48,8 @@
         {% else %}
             <a href="{{ path('sortie_inscription', {'id': sortie.id}) }}" title="Inscription">S'inscrire</a>
         {% endif %}
-
     </div>
+    </div>
+</div>
 {% endblock %}
 

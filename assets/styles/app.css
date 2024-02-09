@@ -118,6 +118,12 @@ footer p {
    justify-content: flex-end;
 }
 
+.titrephone h1{
+   text-align: center;
+   font-size: 1.4em;
+   margin-bottom: 20px;
+}
+
 /***************** FORM ***********************/
 
 .form-super-container {
@@ -433,7 +439,7 @@ footer p {
 }
 
 
-@media screen and (max-width: 750px) {
+@media screen and (max-width: 768px) {
 
    body {
       background-color: #111111;
