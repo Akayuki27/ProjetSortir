@@ -332,4 +332,9 @@ footer p {
       background-color: #ff9800;
    }
 
+   .nav_mobile {
+      visibility: hidden;
+      display: none;
+   }
+
 }

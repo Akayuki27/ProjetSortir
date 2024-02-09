@@ -23,18 +23,18 @@
             </div>
             <nav>
                 {% if app.user %}
-                    <a href="{{ path('app_groupe_list') }}">Mes groupes</a>
-                    <a href="{{ path("sortie_create") }}" title="Ajouter une sortie">Ajouter une sortie</a>
-                    <a href="{{ path("sortie_list") }}" title="Sorties">Toutes les sorties</a>
+                    <a href="{{ path('app_groupe_list') }}" class="nav_mobile">Mes groupes</a>
+                    <a href="{{ path("sortie_create") }}" title="Ajouter une sortie" class="nav_mobile">Ajouter une sortie</a>
+                    <a href="{{ path("sortie_list") }}" title="Sorties" class="nav_mobile">Toutes les sorties</a>
                     {% if is_granted("ROLE_ADMIN") %}
-                    <a href="{{ path("app_admin_villes") }}" title="villes">Villes</a>
-                    <a href="{{ path("app_admin_campus") }}" title="campus">Campus</a>
-                    <a href="{{ path("app_register") }}" title="register">Nouvel utilisateur</a>
-                    <a href="{{ path('app_admin_participant_liste') }}">Liste des participants</a>
+                    <a href="{{ path("app_admin_villes") }}" title="villes" class="nav_mobile">Villes</a>
+                    <a href="{{ path("app_admin_campus") }}" title="campus" class="nav_mobile">Campus</a>
+                    <a href="{{ path("app_register") }}" title="register" class="nav_mobile">Nouvel utilisateur</a>
+                    <a href="{{ path('app_admin_participant_liste') }}" class="nav_mobile">Liste des participants</a>
 
                         {% endif %}
-                    <a href="{{ path('app_profil', {'id': app.user.id}) }}">Mon Profil</a>
-                    <a href="{{ path("app_logout") }}" title="logout">Logout</a>
+                    <a href="{{ path('app_profil', {'id': app.user.id}) }}" class="nav_mobile">Mon Profil</a>
+                    <a href="{{ path("app_logout") }}" title="logout" class="nav_mobile">Logout</a>
                 {% endif %}
             </nav>
         </div>
