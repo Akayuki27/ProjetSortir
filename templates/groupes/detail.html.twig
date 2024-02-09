@@ -1,12 +1,18 @@
 {% extends 'base.html.twig' %}
 
-{% block titrepage %}
-    {{ group.nom }}
+{% block titrepage %}<div class="title-container">
+    <h1>{{ group.nom }}</h1>
+</div>
 {% endblock %}
 
 {% block body %}
+<div class="participant-container">
+    <div class="participant-item">
     <h1>{{ group.nom }}</h1>
     {% for participant in group.participant %}
-        <a href="{{ path('app_profil', {'id' :participant.id}) }}">{{ participant.firstname }} {{ participant.lastname }}</a><br>
+        <a href="{{ path('app_profil', {'id' :participant.id}) }}">{{ participant.firstname }} {{ participant.lastname }}</a>
     {% endfor %}
+
+    </div>
+</div>
 {% endblock %}

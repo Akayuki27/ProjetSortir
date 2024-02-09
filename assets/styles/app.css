@@ -294,6 +294,20 @@ footer p {
    margin: auto auto 20px;
 }
 
+.list-super-container{
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   background-color: #282828;
+   border-radius: 5px;
+   padding: 20px;
+   max-width: 800px;
+   gap: 20px;
+   margin: auto auto 20px;
+   min-width: 200px;
+   align-items: center;
+}
+
 /***************** FLASH ***********************/
 
 .flash-container {
@@ -331,6 +345,8 @@ footer p {
 #petiteNav {
    display: none;
 }
+
+
 
 /***************** MEDIA QUERIES ***********************/
 

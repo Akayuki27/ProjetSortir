@@ -13,10 +13,13 @@
             {% for groupe in groupes %}
                 {% if groupe.participant.contains(app.user)   %}
                 <div class="list-container">
-                   <a href="{{ path('app_groupe_details', {'id' : groupe.id}) }}" title="{{ groupe.nom }}">{{ groupe.nom }}</a>                </div>
+                   <a href="{{ path('app_groupe_details', {'id' : groupe.id}) }}" title="{{ groupe.nom }}">{{ groupe.nom }}</a>
                 {% endif %}
+                </div>
             {% endfor %}
         </div>
-        <a href="{{ path('app_groupe_create') }}" title="Créer votre groupe">Créer votre groupe</a>
+        <div class="list-super-container">
+            <button class="btn-little"><a href="{{ path('app_groupe_create') }}" title="Créer votre groupe">Créer votre groupe</a></button>
+        </div>
     </div>
 {% endblock %}

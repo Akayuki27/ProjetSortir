@@ -12,29 +12,27 @@
         <p>Lieu: {{ sortie.lieu.nom }}</p>
         <p>Durée: {{ sortie.duree }}</p>
         {% if (sortie.dateLimiteInscription > today) %}
-        <p>Date limite d'inscription: {{ sortie.dateLimiteInscription | date }}</p>
+        <p>Date limite d'inscription: {{ sortie.dateLimiteInscription | format_datetime('full', 'short', locale='fr') | capitalize}}</p>
         {% else %}
         <p>Inscriptions cloturées</p>
         {% endif %}
         <p>Concernant la sortie: {{ sortie.infosSortie }}</p>
     </div>
+    <br>
     <div>
-        <h2>Liste des participants</h2>
-        <ul>
-        {% for participant in sortie.participants %}
-           <li>{{ participant.lastname | upper }} {{ participant.firstname }}</li>
-        {% endfor %}
-        </ul>
+        <h2>Liste des participants</h2><br>
         <div>
-        <p>Nombre de participants: {{ sortie.participants | length }}</p>
+        <ul>
         {% set userIsParticipant = false %}
         {% for participant in sortie.participants %}
             {% if app.user == participant %}
                 {% set userIsParticipant = true %}
             {% endif %}
-            <a href="{{ path('app_profil', {'id' :participant.id}) }}">{{ participant.firstname }} {{ participant.lastname }}</a><br>
+            <li><a href="{{ path('app_profil', {'id' :participant.id}) }}">{{ participant.firstname }} {{ participant.lastname }}</a></li><br>
         {% endfor %}
-        </div>
+        </ul>
+            <p>Nombre de participants: {{ sortie.participants | length }}</p>
+        </div><br>
         {% if userIsParticipant %}
             <a href="{{ path('sortie_desister', {'id' : sortie.id}) }}">Se désister</a>
         {% else %}
@@ -43,3 +41,4 @@
 
     </div>
 {% endblock %}
+
