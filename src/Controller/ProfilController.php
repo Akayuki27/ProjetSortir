@@ -44,13 +44,11 @@ class ProfilController extends AbstractController
             $this->addFlash('success', 'Profil modifié! Good job!');
             return $this->redirectToRoute('sortie_list');
         } else {
-            $form->get('imgName')->addError(new FormError('Le fichier que vous avez télécharger ne correspond pas à nos validation'));
+            $this->addFlash('error', 'Le formulaire n\'est pas valide, veuillez bien respecter les champs');
+            return $this->render('profil/modification.html.twig', [
+                'modificationProfil' => $form->createView(),
+            ]);
         }
-
-        // Afficher le formulaire dans le template Twig
-        return $this->render('profil/modification.html.twig', [
-            'modificationProfil' => $form->createView(),
-        ]);
     }
 
     #[Route('/{id}', name: '')]

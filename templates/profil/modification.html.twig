@@ -38,6 +38,7 @@
             <div class="form-item">
                 <label for="{{ modificationProfil.imgName.vars.id }}">Photo (PNG, JPG ou JPEG)</label>
                 {{ form_widget(modificationProfil.imgName) }}
+                {{ form_errors(modificationProfil.imgName) }}
             </div>
             <div class="form-item">
                 <label for="{{ modificationProfil.isActive.vars.id }}">Actif</label>
