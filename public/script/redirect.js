@@ -1,0 +1,14 @@
+// Fonction pour détecter la largeur de l'écran
+function detectScreenSize() {
+    var width = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
+
+    // Redirection en fonction de la largeur de l'écran
+    if (width < 768) { // Exemple : rediriger si la largeur est inférieure à 768px
+        window.location.href = 'page_petit_ecran'; // Remplacez 'page_petit_ecran' par l'URL de la page de redirection pour les petits écrans
+    } else {
+        window.location.href = 'app_sortie_list'; // Remplacez 'page_grand_ecran' par l'URL de la page de redirection pour les grands écrans
+    }
+}
+
+// Appel de la fonction au chargement de la page
+window.onload = detectScreenSize;
