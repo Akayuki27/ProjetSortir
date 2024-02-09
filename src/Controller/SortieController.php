@@ -93,6 +93,19 @@ class SortieController extends AbstractController
         ]);
     }
 
+    #[Route('/mesSorties', name: 'mes_sorties')]
+    public function mesSorties(SortieRepository $repository, Request $request,
+                         ParticipantRepository $repo): Response
+    {
+        $user = $this->getUser();
+        $participant = $repo->findOneBy(['pseudo' => $user->getUserIdentifier()]);
+
+        $sorties = $repository->findByUser($participant);
+        return $this->render('sortie/listMobile.html.twig', [
+            'sorties' => $sorties
+        ]);
+    }
+
     #[Route('/details/{id}', name: 'details')]
     public function details(SortieRepository $repository, int $id): Response
     {

@@ -4,9 +4,7 @@ function detectScreenSize() {
 
     // Redirection en fonction de la largeur de l'écran
     if (width < 768) { // Exemple : rediriger si la largeur est inférieure à 768px
-        window.location.href = 'page_petit_ecran'; // Remplacez 'page_petit_ecran' par l'URL de la page de redirection pour les petits écrans
-    } else {
-        window.location.href = 'app_sortie_list'; // Remplacez 'page_grand_ecran' par l'URL de la page de redirection pour les grands écrans
+        window.location.href = 'http://localhost/ProjetSortir/public/sortie/mesSorties'; // Remplacez 'page_petit_ecran' par l'URL de la page de redirection pour les petits écrans
     }
 }
 
