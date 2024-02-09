@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Data\SearchData;
+use App\Entity\Participant;
 use App\Entity\Sortie;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -107,6 +108,23 @@ class SortieRepository extends ServiceEntityRepository
             $sortie->setEtat($this->etatRepository->findOneBy(['libelle' => 'passée']));
             $this->em->flush();
         }
+    }
+
+    /**
+     * @return Sortie[] Returns an array of Sortie objects
+     */
+    public function findByUser(Participant $user) {
+        $query = $this->createQueryBuilder('s')
+            ->select('c', 'p', 's')
+            ->join('s.campus', 'c')
+            ->leftJoin('s.participants', 'p')
+            ->andWhere(':id MEMBER OF s.participants')
+            ->setParameter('id', $user->getId())
+            ->andWhere('c.id = :campus')
+            ->setParameter('campus', $user->getEstRattacheA()->getId())
+                ->andWhere('s.organisateur = :organisateur')
+                ->setParameter('organisateur', $user->getId());
+        return $query->getQuery()->getResult();
     }
 
 
