@@ -124,6 +124,12 @@ footer p {
    margin-bottom: 20px;
 }
 
+.etat_annulee {
+   color: #1084ef;
+   width: 90%;
+   margin: auto;
+}
+
 /***************** FORM ***********************/
 
 .form-super-container {
@@ -431,13 +437,6 @@ footer p {
    }
 
 }
-
-.etat_annulee {
-   color: #1084ef;
-   width: 90%;
-   margin: auto;
-}
-
 
 @media screen and (max-width: 768px) {
 
