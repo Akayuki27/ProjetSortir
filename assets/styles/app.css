@@ -422,6 +422,12 @@ footer p {
 
 }
 
+.etat_annulee {
+   color: #1084ef;
+   width: 90%;
+   margin: auto;
+}
+
 
 @media screen and (max-width: 750px) {
 

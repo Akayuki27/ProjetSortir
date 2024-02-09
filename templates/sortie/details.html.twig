@@ -9,6 +9,16 @@
 {% block body %}
     <h1>{{ sortie.nom }}</h1>
     <div>
+        {% if sortie.etat.libelle == 'annulée' %}
+            <div >
+                <p>Sortie {{ sortie.etat.libelle | lower }}</p>
+                <p>motif: {{ sortie.motifAnnulation }}</p>
+            </div>
+        {% else %}
+            <div >
+                <p>Sortie {{ sortie.etat.libelle | lower }}</p>
+            </div>
+        {% endif %}
         <p>Lieu: {{ sortie.lieu.nom }}</p>
         <p>Durée: {{ sortie.duree }}</p>
         {% if (sortie.dateLimiteInscription > today) %}

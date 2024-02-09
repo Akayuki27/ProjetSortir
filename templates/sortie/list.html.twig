@@ -68,6 +68,16 @@
         {% for sortie in sorties %}
             <div class="participant-item">
                 <h2><a id="titre-sortie" href="{{ path('sortie_details', {'id':sortie.id}) }}" title="details">{{ sortie.nom }}</a></h2>
+                {% if sortie.etat.libelle == 'annulée' %}
+                    <div class="etat_annulee">
+                        <p>Sortie {{ sortie.etat.libelle | lower }}</p>
+                        <p>motif: {{ sortie.motifAnnulation }}</p>
+                    </div>
+                {% else %}
+                    <div >
+                        <p>Sortie {{ sortie.etat.libelle | lower }}</p>
+                    </div>
+                {% endif %}
                 <p>Lieu: {{ sortie.lieu.nom }}</p>
                 <p>Date de la sortie : {{ sortie.dateHeureDebut | format_datetime('full', 'short', locale='fr') }}</p>
                 <p>Nombre d'inscrits : {{ sortie.participants | length }}/{{ sortie.nbInscriptionMax }}</p>
