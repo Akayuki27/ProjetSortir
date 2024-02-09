@@ -10,6 +10,23 @@ function detectScreenSize() {
     return screen;
 }
 
+function changeContent(type) {
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+        if (this.readyState === 4 && this.status === 200) {
+            document.getElementById("foo").innerHTML =
+                this.responseText;
+        }
+    };
+    if (type === 'mobile') {
+        xhttp.open("GET", "/sortie/mesSorties", true);
+    } else {
+        xhttp.open("GET", "/sortie/list", true);
+
+    }
+    xhttp.send();
+}
+
 // Appel de la fonction au chargement de la page
 window.onload = detectScreenSize;
 
