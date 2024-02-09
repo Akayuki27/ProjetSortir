@@ -371,6 +371,23 @@ footer p {
       background-color: #6b2b4a;
    }
 
+   .title-container {
+      display: none;
+   }
+
+   .header-container {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      margin: auto;
+      height: 160px;
+   }
+
+   .high-right {
+      display: none;
+   }
+
    #logoblue {
       display: none;
    }
@@ -378,8 +395,9 @@ footer p {
    #logopink {
       display: block;
    }
-   
+
 }
+
 
 @media screen and (max-width: 750px) {
 
@@ -399,16 +417,22 @@ footer p {
       background-color: #13395d;
    }
 
+   .header-container {
+      padding: 10px;
+      height: 100px;
+      gap: 0;
+   }
+
+   .nav_mobile {
+      visibility: hidden;
+      display: none;
+   }
+
    #logoblue {
       display: block;
    }
 
    #logopink {
-      display: none;
-   }
-
-   .nav_mobile {
-      visibility: hidden;
       display: none;
    }
 
