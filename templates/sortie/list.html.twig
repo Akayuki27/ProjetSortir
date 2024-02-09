@@ -74,13 +74,13 @@
             <p>Clôture des inscriptions : {{ sortie.dateLimiteInscription | format_datetime('full', 'short', locale='fr') }}</p>
             {% if is_granted("ROLE_ADMIN") or app.user == sortie.organisateur %}
             <div class="participant-modif">
-                <a href="{{ path('sortie_details', {'id':sortie.id}) }}" title="delete">Détail</a>
+                <a href="{{ path('sortie_details', {'id':sortie.id}) }}" title="delete">Détails</a>
                 <a href="{{ path('sortie_modifier', {'id':sortie.id}) }}" title="modifier">Modifier</a>
             </div>
             <div class="participant-modif">
                 <a href="{{ path('sortie_annuler', {'id':sortie.id}) }}" title="annuler">Annuler</a>
                 <a href="{{ path('sortie_delete', {'id':sortie.id}) }}" title="delete"
-                   onclick="return confirm('Êtes-vous sûr de vouloir bousiller cette activitée ?')">Supprimer</a>
+                   onclick="return confirm('Êtes-vous sûr de vouloir bousiller cette activité ?')">Supprimer</a>
             </div>
             {% endif %}
         </div>
