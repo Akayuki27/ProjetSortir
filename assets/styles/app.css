@@ -466,4 +466,9 @@ footer p {
       display: none;
    }
 
+   #grosseNav {
+      display: none;
+      visibility: hidden;
+   }
+
 }

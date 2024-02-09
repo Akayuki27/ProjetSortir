@@ -12,7 +12,7 @@
     </div>
 {% endblock %}
 {% block body %}
-    <div id="foo">
+<div id="foo">
     <div class="sortie-form-super-container">
         {# formulaire de recherche #}
         {{ form_errors(form) }}
@@ -97,8 +97,9 @@
             </div>
         {% endfor %}
     </div>
-    </div>
+</div>
 {% endblock %}
+
 
 {% block javascripts %}
     {{ parent() }} {# Cette ligne permet d'inclure les scripts JavaScript déjà présents dans le fichier de base #}
@@ -116,9 +117,8 @@
                 };
                 xhttp.open("GET", "/sortie/mesSorties", true);
                 xhttp.send();
-                console.log('done');
             }
             changeContent();
         }
-    </script> {# Remplacez 'nom_du_fichier.js' par le chemin vers votre fichier JavaScript #}
+    </script>
 {% endblock %}
