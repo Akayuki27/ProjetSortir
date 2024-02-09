@@ -6,6 +6,7 @@ use App\Data\SearchData;
 use App\Entity\Lieu;
 use App\Entity\Sortie;
 use App\Entity\Ville;
+use App\Form\AnnulerSortieType;
 use App\Form\LieuType;
 use App\Form\ModifSortieType;
 use App\Form\SearchForm;
@@ -183,7 +184,7 @@ class SortieController extends AbstractController
                              EntityManagerInterface $entityManager): Response
     {
         $sortie = $repository->find($id);
-        $form = $this->createForm(ModifSortieType::class, $sortie);
+        $form = $this->createForm(AnnulerSortieType::class, $sortie);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $sortie->setEtat($etatRepository->findOneBy(['libelle' => 'annulée']));

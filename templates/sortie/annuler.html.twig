@@ -8,20 +8,21 @@
 {% endblock %}
 {% block body %}
 
-    {{ form_start(form) }}
-    <div style="display: none">
-    {{ form_widget(form) }}
-    </div>
+
+
     <p>Campus: {{ sortie.campus.nom }}</p>
     <p>Lieu: {{ sortie.lieu.nom }}</p>
     <p>Rue: {{ sortie.lieu.rue }}</p>
     <p>Ville: {{ sortie.lieu.ville.nom }}</p>
     <p>Code Postal: {{ sortie.lieu.ville.codePostal }}</p>
-    <label for="raison">Pour quel motif annulez-vous la sortie ?</label>
-    <textarea id="raison"></textarea>
-    </br>
+    {{ form_start(form) }}
+    <div>
+    {{ form_label(form.motifAnnulation) }}
+    {{ form_widget(form.motifAnnulation) }}
+    </div>
     <button>Annuler la sortie</button>
-
     {{ form_end(form) }}
+
+
     <a href="{{ path('sortie_list') }}" title="retour">Retour</a>
 {% endblock %}
