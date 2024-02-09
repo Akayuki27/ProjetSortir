@@ -18,8 +18,11 @@
     <body>
     <header>
         <div class="header-container">
-            <div>
+            <div id="logoblue">
             <a href="{{ path('sortie_list') }}" title="Page d'accueil"><img class="logo" src="{{ asset('img/enisortir1.jpg') }}" alt="Logo"></a>
+            </div>
+            <div id="logopink">
+                <a href="{{ path('sortie_list') }}" title="Page d'accueil"><img class="logo" src="{{ asset('img/enisortir1rose.jpg') }}" alt="Logo"></a>
             </div>
             <nav>
                 {% if app.user %}

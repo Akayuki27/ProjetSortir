@@ -72,7 +72,7 @@ footer p {
    min-width: 80px;
 }
 
-.btn:hover {
+.btn:hover, .btn-little:hover {
    background-color: #13395d;
 }
 
@@ -324,9 +324,13 @@ footer p {
    text-decoration: none;
 }
 
+#logopink {
+   display: none;
+}
+
 /***************** MEDIA QUERIES ***********************/
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 750px) {
 
    body {
       background-color: #ff9800;
@@ -335,6 +339,34 @@ footer p {
    .nav_mobile {
       visibility: hidden;
       display: none;
+   }
+
+}
+
+@media screen and (max-width: 1000px) {
+
+   body {
+      background-color: hotpink;
+   }
+
+   a {
+      color: hotpink;
+   }
+
+   .btn, .btn-little {
+      background-color: hotpink;
+   }
+
+   .btn:hover, .btn-little:hover {
+      background-color: #6b2b4a;
+   }
+
+   #logoblue {
+      display: none;
+   }
+
+   #logopink {
+      display: block;
    }
 
 }
