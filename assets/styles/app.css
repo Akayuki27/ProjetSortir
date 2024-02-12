@@ -130,6 +130,10 @@ footer p {
    margin: auto;
 }
 
+.erreur {
+   text-align: center;
+}
+
 /***************** FORM ***********************/
 
 .form-super-container {
