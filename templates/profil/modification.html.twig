@@ -42,10 +42,12 @@
                 {{ form_widget(modificationProfil.imgName) }}
                 {{ form_errors(modificationProfil.imgName) }}
             </div>
+            {% if is_granted("ROLE_ADMIN") %}
             <div class="form-item">
                 <label for="{{ modificationProfil.active.vars.id }}">Actif</label>
                 {{ form_widget(modificationProfil.active) }}
             </div>
+            {% endif %}
             <div class="form-btn">
                 <button type="submit" class="btn">Modifier</button>
             </div>
