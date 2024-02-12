@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Data\SearchData;
+use App\Entity\Etat;
 use App\Entity\Participant;
 use App\Entity\Sortie;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
@@ -33,7 +34,9 @@ class SortieRepository extends ServiceEntityRepository
         $query = $this->createQueryBuilder('s')
             ->select('c', 'p', 's')
             ->join('s.campus', 'c')
-            ->leftJoin('s.participants', 'p');
+            ->leftJoin('s.participants', 'p')
+            ->andWhere('s.etat != :archivee')
+            ->setParameter('archivee', $this->etatRepository->findOneBy(['libelle' => 'archivée']));
 
         if (!empty($search->q)) {
             $query = $query
