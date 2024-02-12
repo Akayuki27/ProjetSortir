@@ -1,27 +1,32 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Inscription{% endblock %}
+{% block title %}Inscriptions Multiples{% endblock %}
 {% block titrepage %}
     <div class="title-container">
-        <h1>Inscription</h1>
+        <h1>Inscriptions Multiples</h1>
     </div>
 {% endblock %}
 {% block body %}
-<div class="form-super-container">
-    {{ form_errors(CSVform) }}
+
+
     {{ form_start(CSVform) }}
-    <div class="form-container">
-        <div class="form-item">
-            {{ form_row(CSVform.csv) }}
-        </div>
-        <div class="form-container">
-            {{ form_row(CSVform.estRattacheA) }}
-        </div>
-        <div class="form-btn">
-    <button class="btn">Rajouter les participants</button>
-        </div>
+    <div class="csv_container">
+        {{ form_errors(CSVform) }}
+
+            <div class="csv_item">
+                {{ form_label(CSVform.csv) }}
+                {{ form_widget(CSVform.csv) }}
+            </div>
+            <div class="csv_item">
+                {{ form_label(CSVform.estRattacheA) }}
+                {{ form_widget(CSVform.estRattacheA) }}
+            </div>
+            <div class="form-btn">
+        <button class="btn">Rajouter les participants</button>
+            </div>
+
     </div>
     {{ form_end(CSVform) }}
 
-</div>
+
 {% endblock %}
