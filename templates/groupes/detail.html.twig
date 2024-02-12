@@ -10,10 +10,12 @@
     <div class="participant-item">
     <h1>{{ group.nom }}</h1>
 
-        <h3>Liste des participants</h3>
+        <h3>Liste des participants :</h3>
+        <br>
         <ul class="sans-puces">
     {% for participant in group.participant %}
         <li><a href="{{ path('app_profil', {'id' :participant.id}) }}">{{ participant.firstname }} {{ participant.lastname }}</a></li>
+        <br>
     {% endfor %}
         </ul>
     </div>
