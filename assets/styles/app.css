@@ -336,6 +336,27 @@ footer p {
    list-style-type: none;
 }
 
+/***************** GROUPES ***********************/
+
+.form-groupe-container {
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   background-color: #282828;
+   border-radius: 5px;
+   padding: 20px;
+   max-width: 800px;
+   gap: 20px;
+   margin: auto auto 20px;
+}
+
+.form-groupe-list{
+   display: flex;
+   flex-direction: row;
+   flex-wrap: wrap;
+   gap: 10px;
+}
+
 
 /***************** FLASH ***********************/
 

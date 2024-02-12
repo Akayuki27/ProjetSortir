@@ -21,14 +21,14 @@
                 <p>Sortie {{ sortie.etat.libelle | lower }}</p>
             </div>
         {% endif %}
-        <p>Lieu: {{ sortie.lieu.nom }}</p>
-        <p>Durée: {{ sortie.duree }}</p>
+        <p>Lieu : {{ sortie.lieu.nom }}</p>
+        <p>Durée : {{ sortie.duree }} minutes</p>
         {% if (sortie.dateLimiteInscription > today) %}
-        <p>Date limite d'inscription: {{ sortie.dateLimiteInscription | format_datetime('full', 'short', locale='fr') | capitalize}}</p>
+        <p>Date limite d'inscription : {{ sortie.dateLimiteInscription | format_datetime('full', 'short', locale='fr') | capitalize}}</p>
         {% else %}
         <p>Inscriptions cloturées</p>
         {% endif %}
-        <p>Concernant la sortie: {{ sortie.infosSortie }}</p>
+        <p>Concernant la sortie : {{ sortie.infosSortie }}</p>
     </div>
     <br>
     <div>
@@ -48,6 +48,9 @@
         {% else %}
             <a href="{{ path('sortie_inscription', {'id': sortie.id}) }}" title="Inscription">S'inscrire</a>
         {% endif %}
+    </div>
+    <div class="lien-retour-phone">
+        <a href="{{ path('sortie_list') }}">Retour liste des Sorties</a>
     </div>
     </div>
 </div>
