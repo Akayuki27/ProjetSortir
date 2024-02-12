@@ -9,10 +9,15 @@
 <div class="participant-container">
     <div class="participant-item">
     <h1>{{ group.nom }}</h1>
-    {% for participant in group.participant %}
-        <a href="{{ path('app_profil', {'id' :participant.id}) }}">{{ participant.firstname }} {{ participant.lastname }}</a>
-    {% endfor %}
 
+        <h3>Liste des participants</h3>
+        <ul class="sans-puces">
+    {% for participant in group.participant %}
+        <li><a href="{{ path('app_profil', {'id' :participant.id}) }}">{{ participant.firstname }} {{ participant.lastname }}</a></li>
+    {% endfor %}
+        </ul>
     </div>
+
 </div>
+    <a href="{{ path('app_groupe_list') }}" title="Retour a la liste des groupes" class="list-super-container">Liste des groupes</a>
 {% endblock %}
