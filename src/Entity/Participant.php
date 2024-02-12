@@ -195,6 +195,8 @@ class Participant implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->active;
     }
 
+
+
     public function setActive(bool $active): static
     {
         $this->active = $active;

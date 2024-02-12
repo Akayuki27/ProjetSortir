@@ -33,7 +33,7 @@ class ModifProfilType extends AbstractType
                 'class' => Campus::class,
 'choice_label' => 'nom',
             ])
-            ->add('isActive', CheckboxType::class, [
+            ->add('active', CheckboxType::class, [
                 'label' => 'Actif',
                 'required' => false,
             ])
@@ -44,7 +44,6 @@ class ModifProfilType extends AbstractType
                 'data_class'=> null, // Pour éviter les erreurs liées à la validation des données
                 'constraints' => [
                     new File([
-                        'maxSize' => '5M',
                         'mimeTypes' => [
                             'image/jpeg',
                             'image/pjpeg', // Certains navigateurs envoient des images JPEG avec ce type MIME

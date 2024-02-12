@@ -11,6 +11,7 @@
         {{ form_errors(modificationProfil) }}
         {% dump(form_errors(modificationProfil)) %}
         {{ form_start(modificationProfil) }}
+        {{ form_errors(modificationProfil.imgName) }}
         <div class="form-container">
             <div class="form-item">
                 <label for="{{ modificationProfil.pseudo.vars.id }}">Pseudo</label>
@@ -42,8 +43,8 @@
                 {{ form_errors(modificationProfil.imgName) }}
             </div>
             <div class="form-item">
-                <label for="{{ modificationProfil.isActive.vars.id }}">Actif</label>
-                {{ form_widget(modificationProfil.isActive) }}
+                <label for="{{ modificationProfil.active.vars.id }}">Actif</label>
+                {{ form_widget(modificationProfil.active) }}
             </div>
             <div class="form-btn">
                 <button type="submit" class="btn">Modifier</button>
