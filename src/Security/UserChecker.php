@@ -18,7 +18,7 @@ class UserChecker implements UserCheckerInterface
 
         if (!$user->isActive()) {
             // the message passed to this exception is meant to be displayed to the user
-            throw new CustomUserMessageAccountStatusException('Your user account is not active anymore.');
+            throw new CustomUserMessageAccountStatusException('Votre compte a été désactivé, vous ne pouvez plus vous connecter !');
         }
     }
 
@@ -30,7 +30,7 @@ class UserChecker implements UserCheckerInterface
 
         // user account is expired, the user may be notified
         if (!$user->isActive()) {
-            throw new AccountExpiredException('You have been set inactive');
+            throw new AccountExpiredException('Votre compte a été désactivé, vous ne pouvez plus vous connecter !');
         }
     }
 }
