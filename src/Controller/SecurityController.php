@@ -14,12 +14,7 @@ class SecurityController extends AbstractController
     public function login(AuthenticationUtils $authenticationUtils, ParticipantRepository $participantRepository): Response
     {
         if ($this->getUser()) {
-            if ($participantRepository->findOneBy(['pseudo' =>$this->getUser() ->getUserIdentifier()])->isActive()) {
-                return $this->redirectToRoute('sortie_list');
-            } else {
-                $this->addFlash('error', 'Vous n\'êtes plus un utilisateur actif' );
-            }
-
+            return $this->redirectToRoute('sortie_list');
         }
 
         // get the login error if there is one
