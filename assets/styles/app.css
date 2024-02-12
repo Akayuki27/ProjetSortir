@@ -328,6 +328,11 @@ footer p {
    align-items: center;
 }
 
+.sans-puces {
+   list-style-type: none;
+}
+
+
 /***************** FLASH ***********************/
 
 .flash-container {
