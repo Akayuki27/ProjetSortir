@@ -5,28 +5,32 @@
 {% endblock %}
 
 {% block body %}
-<div>
-    <div class="form-groupe-container">
+<div class="form-super-container">
+    <div class="form-container">
             {{ form_start(form) }}
-        <div class="form-groupe-item">
-            {{ form_row(form.nom) }}
+        <div class="form-item">
+            {{ form_label(form.nom) }}
+            {{ form_widget(form.nom) }}
         </div>
-        <div class="form-groupe-item">
+        <br>
+        <div class="form-item">
             {{ form_label(form.participant) }}
         </div>
+        <br>
         <div class="form-groupe-item">
             {% for participant in form.participant %}
                 <div class="form-groupe-list">
-                    {{ form_row(participant) }}
+                    {{ form_widget(participant) }}
+                    {{ form_label(participant) }}
                 </div>
             {% endfor %}
         </div>
-        <div class="form-groupe-item">
+        <br>
+        <div class="form-item">
             <button type="submit" class="btn">Ajouter !</button>
         </div>
-        <div class="form-groupe-item">
             {{ form_end(form) }}
-        </div>
     </div>
+</div>
 {% endblock %}
 
