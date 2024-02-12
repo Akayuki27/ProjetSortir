@@ -9,20 +9,23 @@
 {% block body %}
 
 
-
+<div class="sortie-annule-container">
     <p>Campus: {{ sortie.campus.nom }}</p>
     <p>Lieu: {{ sortie.lieu.nom }}</p>
     <p>Rue: {{ sortie.lieu.rue }}</p>
     <p>Ville: {{ sortie.lieu.ville.nom }}</p>
     <p>Code Postal: {{ sortie.lieu.ville.codePostal }}</p>
     {{ form_start(form) }}
-    <div>
-    {{ form_label(form.motifAnnulation) }}
-    {{ form_widget(form.motifAnnulation) }}
+    <div class="sortie-annule-item">
+        {{ form_label(form.motifAnnulation) }}
     </div>
-    <button>Annuler la sortie</button>
+    <div class="sortie-annule-item">
+        {{ form_widget(form.motifAnnulation) }}
+    </div>
+    <div class="sortie-annule-item">
+        <button class="btn">Annuler la sortie</button>
+    </div>
     {{ form_end(form) }}
-
-
     <a href="{{ path('sortie_list') }}" title="retour">Retour</a>
+</div>
 {% endblock %}

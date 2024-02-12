@@ -7,12 +7,13 @@
     </div>
 {% endblock %}
 {% block body %}
-
+<div class="sortie-annule-container">
     {{ form_start(form) }}
     {{ form_widget(form) }}
     <p>Rue: {{ sortie.lieu.rue }}</p>
     <p>Code Postal: {{ sortie.lieu.ville.codePostal }}</p>
     </br>
-    <button>Modifier</button>
+    <button class="btn"> Modifier</button>
     {{ form_end(form) }}
+    </div>
 {% endblock %}
