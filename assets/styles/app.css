@@ -343,27 +343,25 @@ footer p {
    display: flex;
    flex-direction: column;
    justify-content: center;
-   align-items: center;
    background-color: #282828;
    border-radius: 5px;
    padding: 20px;
-   max-width: 600px;
-   gap: 20px;
+   max-width: 800px;
    margin: auto auto 20px;
 }
 
 .form-groupe-item{
    display: flex;
    flex-direction: column;
-   justify-content: center;
-   align-items: center;
+   justify-content: flex-start;
    gap:5px;
 }
 
 .form-groupe-list{
    display: flex;
    flex-direction: row;
-   flex-wrap: wrap;
+   margin-bottom: 7px;
+   gap: 20px;
 }
 
 /***************** ANNULATION SORTIE ***********************/
@@ -383,6 +381,16 @@ footer p {
 
 .sortie-annule-item {
    margin-top :5px
+}
+
+/***************** Sortie modificatio **********/
+
+.sortie-modification-item {
+   display: flex;
+   flex-direction: row;
+   justify-content: space-between;
+   gap: 20px;
+
 }
 
 /***************** FLASH ***********************/

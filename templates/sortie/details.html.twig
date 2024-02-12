@@ -40,6 +40,7 @@
                 {% set userIsParticipant = true %}
             {% endif %}
             <a href="{{ path('app_profil', {'id' :participant.id}) }}">{{ participant.firstname }} {{ participant.lastname }}</a></li><br>
+            <br>
         {% endfor %}
             <p>Nombre de participants: {{ sortie.participants | length }}</p>
         </div><br>
