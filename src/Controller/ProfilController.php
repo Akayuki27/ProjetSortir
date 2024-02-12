@@ -50,9 +50,9 @@ class ProfilController extends AbstractController
     }
 
     #[Route('/{id}', name: '')]
-    public function afficherProfil(Request $request, EntityManagerInterface $em, ParticipantRepository $participant, $id): Response
+    public function afficherProfil(ParticipantRepository $participantRepository, $id): Response
     {
-        $participant = $participant->find($id);
+        $participant = $participantRepository->find($id);
 
         if (!$participant) {
             throw $this->createNotFoundException('Profile not found');
