@@ -8,31 +8,36 @@
 {% endblock %}
 {% block body %}
 <form method="post">
-    {% if error %}
-        <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-    {% endif %}
+    <div class="login_container">
+        {% if error %}
+            <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+        {% endif %}
 
-    {% if app.user %}
-        <div class="mb-3">
-            You are logged in as {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}">Logout</a>
+        {% if app.user %}
+            <div class="mb-3">
+                You are logged in as {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}">Logout</a>
+            </div>
+        {% endif %}
+        <div class="login_item">
+            <label for="inputPseudo">Pseudo</label>
+            <input type="text" value="{{ last_username }}" name="pseudo" id="inputPseudo" class="form-control" autocomplete="username" required autofocus>
         </div>
-    {% endif %}
-
-    <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
-    <label for="inputPseudo">Pseudo</label>
-    <input type="text" value="{{ last_username }}" name="pseudo" id="inputPseudo" class="form-control" autocomplete="username" required autofocus>
-    <label for="inputPassword">Password</label>
-    <input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required>
-
-    <input type="hidden" name="_csrf_token"
-           value="{{ csrf_token('authenticate') }}"
-    >
-    <label for="_remember_me">Se souvenir de moi</label>
-    <input type="checkbox" name="_remember_me">
-    <a href="{{ path('app_forgot_password_request') }}" title="Mot de passe oublié ?">Mot de passe oublié ?</a>
-    <button class="btn btn-lg btn-primary" type="submit">
-        Sign in
-    </button>
+        <div class="login_item">
+            <label for="inputPassword">Password</label>
+            <input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required>
+        </div>
+        <input type="hidden" name="_csrf_token"
+               value="{{ csrf_token('authenticate') }}"
+        >
+        <div class="login_item">
+            <label for="_remember_me">Se souvenir de moi</label>
+            <input type="checkbox" name="_remember_me" id="_remember_me">
+        </div>
+        <a href="{{ path('app_forgot_password_request') }}" title="Mot de passe oublié ?">Mot de passe oublié ?</a>
+        <button class="btn btn-lg btn-primary" type="submit">
+            Se connecter
+        </button>
+    </div>
 </form>
     {#
     <script src="{{ asset('script/redirect.js') }}"></script>
