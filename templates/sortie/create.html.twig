@@ -15,18 +15,16 @@
                 <div class="form-item justify-center">
                     <h2>Création d'une sortie</h2>
                 </div>
-                {{ form_errors(form.dateHeureDebut) }}
-                {{ form_errors(form.duree) }}
-                {{ form_errors(form.nbInscriptionMax) }}
                 <div class="form-item">
                     <label for="{{ form.nom.vars.id }}">Nom</label>
                     {{ form_widget(form.nom) }}
                 </div>
+                {{ form_errors(form.dateHeureDebut) }}
                 <div class="form-item">
-
                     <label for="{{ form.dateHeureDebut.vars.id }}">Date début</label>
                     {{ form_widget(form.dateHeureDebut) }}
                 </div>
+                {{ form_errors(form.duree) }}
                 <div class="form-item">
                     <label for="{{ form.duree.vars.id }}">Durée (en minutes)</label>
                     {{ form_widget(form.duree) }}
@@ -35,6 +33,7 @@
                     <label for="{{ form.dateLimiteInscription.vars.id }}">Fin des inscriptions</label>
                     {{ form_widget(form.dateLimiteInscription) }}
                 </div>
+                {{ form_errors(form.nbInscriptionMax) }}
                 <div class="form-item">
                     <label for="{{ form.nbInscriptionMax.vars.id }}">Nbr de participants max</label>
                     {{ form_widget(form.nbInscriptionMax) }}

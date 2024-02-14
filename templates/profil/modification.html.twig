@@ -8,10 +8,7 @@
 {% endblock %}
 {% block body %}
     <div class="form-super-container">
-        {{ form_errors(modificationProfil) }}
-        {% dump(form_errors(modificationProfil)) %}
         {{ form_start(modificationProfil) }}
-        {{ form_errors(modificationProfil.imgName) }}
         <div class="form-container">
             <div class="form-item">
                 <label for="{{ modificationProfil.pseudo.vars.id }}">Pseudo</label>
@@ -37,10 +34,11 @@
                 <label for="{{ modificationProfil.estRattacheA.vars.id }}">Campus</label>
                 {{ form_widget(modificationProfil.estRattacheA) }}
             </div>
+                {{ form_errors(modificationProfil.ImgName) }}
             <div class="form-item">
-                <label for="{{ modificationProfil.imgName.vars.id }}">Photo (PNG, JPG ou JPEG)</label>
-                {{ form_widget(modificationProfil.imgName) }}
-                {{ form_errors(modificationProfil.imgName) }}
+                <label for="{{ modificationProfil.ImgName.vars.id }}">Photo (PNG, JPG ou JPEG)</label>
+                {{ form_widget(modificationProfil.ImgName) }}
+
             </div>
             {% if is_granted("ROLE_ADMIN") %}
             <div class="form-item">

@@ -37,7 +37,7 @@ class ModifProfilType extends AbstractType
                 'label' => 'Actif',
                 'required' => false,
             ])
-            ->add('imgName', FileType::class, [
+            ->add('ImgName', FileType::class, [
                 'label' => 'Image (JPG, JPEG)',
                 'mapped' => false,
                 'required' => false,

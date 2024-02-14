@@ -9,11 +9,13 @@
 {% block body %}
 <div class="form-groupe-container">
     {{ form_start(form) }}
+    {{ form_errors(form.dateHeureDebut) }}
     <div class="sortie-modification-item">
     {{ form_label(form.dateHeureDebut) }}
     {{ form_widget(form.dateHeureDebut) }}
     </div>
     <br>
+    {{ form_errors(form.duree) }}
     <div class="sortie-modification-item">
     {{ form_label(form.duree) }}
     {{ form_widget(form.duree) }}
@@ -24,6 +26,7 @@
     {{ form_widget(form.dateLimiteInscription) }}
     </div>
     <br>
+    {{ form_errors(form.nbInscriptionMax) }}
     <div class="sortie-modification-item">
     {{ form_label(form.nbInscriptionMax) }}
     {{ form_widget(form.nbInscriptionMax) }}
@@ -47,7 +50,7 @@
     <div class="sortie-modification-item">
     {{ form_label(form.Lieu) }}
     {{ form_widget(form.Lieu) }}
-    </div class="sortie-modification-item">
+    </div>
     <br>
     <p class="sortie-modification-item">Rue: {{ sortie.lieu.rue }}</p>
     <br>

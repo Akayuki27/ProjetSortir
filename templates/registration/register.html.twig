@@ -9,7 +9,6 @@
 {% block body %}
     <div class="form-super-container">
         {{ form_start(registrationForm) }}
-        {{ form_errors(registrationForm.ImgName) }}
         <div class="form-container">
             <div class="form-item">
                 <label for="{{ registrationForm.pseudo.vars.id }}">Pseudo</label>
@@ -39,6 +38,7 @@
                 <label for="{{ registrationForm.estRattacheA.vars.id }}">Campus</label>
                 {{ form_widget(registrationForm.estRattacheA) }}
             </div>
+            {{ form_errors(registrationForm.ImgName) }}
             <div class="form-item">
                 <label for="{{ registrationForm.ImgName.vars.id }}">Photo (PNG, JPG ou JPEG)</label>
                 {{ form_widget(registrationForm.ImgName) }}

@@ -45,7 +45,7 @@ class ProfilController extends AbstractController
             return $this->redirectToRoute('sortie_list');
         }
         return $this->render('profil/modification.html.twig', [
-            'modificationProfil' => $form->createView(),
+            'modificationProfil' => $form,
         ]);
     }
 

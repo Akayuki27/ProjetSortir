@@ -7,6 +7,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Mime\Part\File;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -60,7 +61,7 @@ class Participant implements UserInterface, PasswordAuthenticatedUserInterface
     private ?Campus $estRattacheA = null;
 
     #[ORM\Column(length: 255, nullable: true)]
-    #[Assert\Regex('/^\w\.(jpg|png|pjpeg|jpeg)/', message: 'Veuillez télécharger une image JPG, PNG ou JPEG valide')]
+    #[Assert\Image(mimeTypes: ['image/png', 'image/jpeg', 'image/jpg', 'image/pjpeg'], mimeTypesMessage: 'Veuillez télécharger une image JPG, PNG ou JPEG valide')]
     private ?string $ImgName = null;
 
     #[ORM\ManyToMany(targetEntity: Group::class, mappedBy: 'participant')]
