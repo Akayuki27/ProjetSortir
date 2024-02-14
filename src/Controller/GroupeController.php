@@ -69,9 +69,8 @@ class GroupeController extends AbstractController
     }
 
     #[Route('/details/{id}', name: '_details')]
-    public function details(GroupRepository $repo, int $id): Response
+    public function details(Group $group): Response
     {
-        $group = $repo->find($id);
         return $this->render('groupes/detail.html.twig', [
             'group' => $group,
         ]);

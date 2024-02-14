@@ -142,10 +142,9 @@ class AdminController extends AbstractController
 
     #[Route('/villes/modifier/{id}', name: '_villes_modifier' )]
     public function mofifierVille(EntityManagerInterface $entityManager,
-                                  int $id,
-                                  VilleRepository $villeRepository,
-                                    Request $request) {
-        $ville = $villeRepository->find($id);
+                                  Ville $ville,
+                                    Request $request)
+    {
         $form = $this->createForm(ModifVilleType::class, $ville);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {

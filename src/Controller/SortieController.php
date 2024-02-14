@@ -125,9 +125,9 @@ class SortieController extends AbstractController
     }
 
     #[Route('/details/{id}', name: 'details')]
-    public function details(SortieRepository $repository, int $id): Response
+    public function details( Sortie $sortie): Response
     {
-        $sortie = $repository->find($id);
+
         $today = new \DateTime();
         return $this->render('sortie/details.html.twig', [
             'sortie' => $sortie,
@@ -136,10 +136,9 @@ class SortieController extends AbstractController
     }
 
     #[Route('/inscription/{id}', name: 'inscription')]
-    public function inscription(SortieRepository $repository, EntityManagerInterface $entityManager, int $id): Response
+    public function inscription(EntityManagerInterface $entityManager, Sortie $sortie): Response
     {
         // Récupérer la sortie à laquelle l'utilisateur souhaite s'inscrire
-        $sortie = $repository->find($id);
         $user = $this->getUser();
         $aujourdhui = new \DateTime();
 
@@ -175,12 +174,11 @@ class SortieController extends AbstractController
 
 
     #[Route('/modifier/{id}', name: 'modifier')]
-    public function modifier(SortieRepository $repository,
-                             int $id,
+    public function modifier(Sortie $sortie,
                              Request $request,
                             EntityManagerInterface $entityManager): Response
     {
-        $sortie = $repository->find($id);
+
         $form = $this->createForm(ModifSortieType::class, $sortie);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
@@ -196,11 +194,10 @@ class SortieController extends AbstractController
     }
 
     #[Route('/delete/{id}', name: 'delete')]
-    public function delete(SortieRepository $repository,
-                             int $id,
+    public function delete(Sortie $sortie,
                              EntityManagerInterface $entityManager): Response
     {
-        $sortie = $repository->find($id);
+
         $entityManager->remove($sortie);
         $entityManager->flush();
         $this->addFlash('success', 'Sortie supprimée!');
@@ -208,13 +205,11 @@ class SortieController extends AbstractController
     }
 
     #[Route('/annuler/{id}', name: 'annuler')]
-    public function annuler(SortieRepository $repository,
+    public function annuler(Sortie $sortie,
                              EtatRepository $etatRepository,
-                             int $id,
                              Request $request,
                              EntityManagerInterface $entityManager): Response
     {
-        $sortie = $repository->find($id);
         $form = $this->createForm(AnnulerSortieType::class, $sortie);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
@@ -231,10 +226,9 @@ class SortieController extends AbstractController
     }
 
     #[Route('/desister/{id}', name: 'desister')]
-    public function desister(SortieRepository $repository, EntityManagerInterface $entityManager, int $id): Response
+    public function desister(Sortie $sortie, EntityManagerInterface $entityManager): Response
     {
         // Récupérer la sortie à laquelle l'utilisateur souhaite s'inscrire
-        $sortie = $repository->find($id);
         $user = $this->getUser();
 
         if (!$sortie) {
