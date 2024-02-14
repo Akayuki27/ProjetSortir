@@ -49,7 +49,7 @@ class RegistrationFormType extends AbstractType
                     'choice_label' => 'nom',
                 ]
              )
-            ->add('imgName', FileType::class, [
+            ->add('ImgName', FileType::class, [
                 'label' => 'Image (JPG, JPEG)',
                 'mapped' => false,
                 'required' => false,

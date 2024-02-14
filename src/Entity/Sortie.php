@@ -26,12 +26,14 @@ class Sortie
     private ?\DateTimeInterface $dateHeureDebut = null;
 
     #[ORM\Column]
+    #[Assert\GreaterThan(10, message: 'La durée d\'une sortie ne peut pas être négative ou inférieure à 10min')]
     private ?int $duree = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $dateLimiteInscription = null;
 
     #[ORM\Column]
+    #[Assert\GreaterThan(2, message: 'Le nombre d\' inscriptions max ne peut pas être inférieur à 2')]
     private ?int $nbInscriptionMax = null;
 
     #[ORM\Column(length: 255)]

@@ -16,6 +16,8 @@
                     <h2>Création d'une sortie</h2>
                 </div>
                 {{ form_errors(form.dateHeureDebut) }}
+                {{ form_errors(form.duree) }}
+                {{ form_errors(form.nbInscriptionMax) }}
                 <div class="form-item">
                     <label for="{{ form.nom.vars.id }}">Nom</label>
                     {{ form_widget(form.nom) }}

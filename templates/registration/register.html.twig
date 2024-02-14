@@ -8,8 +8,8 @@
 {% endblock %}
 {% block body %}
     <div class="form-super-container">
-        {{ form_errors(registrationForm) }}
         {{ form_start(registrationForm) }}
+        {{ form_errors(registrationForm.ImgName) }}
         <div class="form-container">
             <div class="form-item">
                 <label for="{{ registrationForm.pseudo.vars.id }}">Pseudo</label>
@@ -40,9 +40,8 @@
                 {{ form_widget(registrationForm.estRattacheA) }}
             </div>
             <div class="form-item">
-                <label for="{{ registrationForm.imgName.vars.id }}">Photo (PNG, JPG ou JPEG)</label>
-                {{ form_widget(registrationForm.imgName) }}
-                {{ form_errors(registrationForm.imgName) }}
+                <label for="{{ registrationForm.ImgName.vars.id }}">Photo (PNG, JPG ou JPEG)</label>
+                {{ form_widget(registrationForm.ImgName) }}
             </div>
             <div class="form-item justify-center">
             <a href="{{ path('app_register_csv') }}">Ajouter plusieurs utilisateurs ?</a>

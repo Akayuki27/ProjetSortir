@@ -60,6 +60,7 @@ class Participant implements UserInterface, PasswordAuthenticatedUserInterface
     private ?Campus $estRattacheA = null;
 
     #[ORM\Column(length: 255, nullable: true)]
+    #[Assert\Regex('/^\w\.(jpg|png|pjpeg|jpeg)/', message: 'Veuillez télécharger une image JPG, PNG ou JPEG valide')]
     private ?string $ImgName = null;
 
     #[ORM\ManyToMany(targetEntity: Group::class, mappedBy: 'participant')]

@@ -11,10 +11,12 @@ use App\Entity\Ville;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\GreaterThan;
 
 class SortieType extends AbstractType
 {
@@ -23,9 +25,9 @@ class SortieType extends AbstractType
         $builder
             ->add('nom')
             ->add('dateHeureDebut')
-            ->add('duree')
+            ->add('duree',IntegerType::class)
             ->add('dateLimiteInscription')
-            ->add('nbInscriptionMax')
+            ->add('nbInscriptionMax',IntegerType::class)
             ->add('infosSortie', TextareaType::class)
             ->add('campus', EntityType::class, [
                 'class' => Campus::class,
