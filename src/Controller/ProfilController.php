@@ -28,7 +28,7 @@ class ProfilController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             // Gérer le téléchargement de la photo
-            $photoFile = $form->get('imgName')->getData();
+            $photoFile = $form->get('ImgName')->getData();
             if ($photoFile) {
                 // Renommer et déplacer le fichier téléchargé
                 $newFileName = md5(uniqid()).'.'.$photoFile->guessExtension();

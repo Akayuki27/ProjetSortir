@@ -14,6 +14,7 @@
                 <label for="{{ registrationForm.pseudo.vars.id }}">Pseudo</label>
                 {{ form_widget(registrationForm.pseudo) }}
             </div>
+            {{ form_errors(registrationForm.plainPassword) }}
             <div class="form-item">
                 <label for="{{ registrationForm.plainPassword.vars.id }}">Mot de Passe</label>
                 {{ form_widget(registrationForm.plainPassword) }}
